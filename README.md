@@ -20,7 +20,7 @@ node scripts/mock-server.mjs
 ## 部署
 
 - 静态站点：GitHub Pages，仓库 `bigWhiteTofu/xujun1569`
-- API：Cloudflare Worker + D1
-- API 域名：`xujun-api.aiecnu.site`
+- API：Cloudflare Worker + D1（通过 Sites 托管）
+- API 域名：`https://xujun-academic-api.xdx555.chatgpt.site`
 
 管理密码通过 Worker secret 配置，不写入前端代码。
