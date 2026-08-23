@@ -1,0 +1,11 @@
+name = "luo-yuying-academic-api"
+main = "src/index.js"
+compatibility_date = "2026-08-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luo-yuying-academic-site"
+database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE"
+
+[vars]
+ALLOWED_ORIGIN = "https://bigwhitetofu.github.io"

@@ -1,0 +1,15 @@
+name = "xujun-academic-api"
+main = "src/index.js"
+compatibility_date = "2026-08-23"
+
+[[routes]]
+pattern = "xujun-api.aiecnu.site"
+custom_domain = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "xujun-academic-site"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+ALLOWED_ORIGIN = "https://bigwhitetofu.github.io"
