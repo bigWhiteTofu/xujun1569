@@ -97,6 +97,11 @@ const ongoingStudies = [
     image: "assets/ongoing/ipm.png", note: "结合多模态编码、行为数据与随机实验检验可见实践证据对信任校准的作用。"
   },
   {
+    journal: "Computers & Education", role: "合作作者", status: "同行评审中",
+    title: "Can Multiple Debating Agents Outperform a Single Socratic Agent? Effects on Secondary School Students’ Critical Thinking",
+    image: "assets/ongoing/compedu.png", note: "比较多智能体辩论与单一苏格拉底式智能体对中学生批判性思维的影响。"
+  },
+  {
     journal: "Business Ethics, the Environment & Responsibility", role: "通讯作者", status: "同行评审中",
     title: "Beyond symbolic compliance: A meta-analysis of corporate AI tasks and non-interchangeable sustainability outcomes",
     image: "assets/ongoing/beer.png", note: "通过元分析区分企业 AI 任务与不同可持续发展结果之间的作用差异。"
@@ -182,7 +187,7 @@ function renderOngoing() {
       <div class="ongoing-card-copy">
         <span>${item.status} · <strong>${item.role}</strong></span>
         <h3>${item.title}</h3>
-        <p><strong>${item.journal}</strong></p>
+        <p class="ongoing-journal">${item.journal}</p>
         <p>${item.note}</p>
         <button class="evidence-button" type="button" data-image="${item.image}" data-title="${item.journal}｜送审状态证明">查看送审截图</button>
       </div>
