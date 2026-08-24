@@ -80,6 +80,12 @@ async function main() {
     });
   }
 
+  await api(`/accounts/${accountId}/d1/database/${database.uuid}/query`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ sql: "DELETE FROM visits WHERE path = '/__system_check'" })
+  });
+
   const source = fs.readFileSync(path.join(root, "worker", "src", "index.js"), "utf8");
   console.log("cloudflare: uploading Worker");
   const metadata = {
