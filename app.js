@@ -251,17 +251,31 @@ function updateScrollProgress() {
   const progress = max > 0 ? scrollY / max : 0;
   document.querySelector("#scroll-progress").style.transform = `scaleX(${progress})`;
 }
-addEventListener("scroll", updateScrollProgress, { passive: true });
-updateScrollProgress();
-
 const sections = ["top", "research", "publications", "ongoing", "projects", "experience", "message"];
 const navLinks = [...document.querySelectorAll("[data-nav]")];
-const sectionObserver = new IntersectionObserver((entries) => {
-  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-  navLinks.forEach((link) => link.classList.toggle("active", link.dataset.nav === visible.target.id));
-}, { rootMargin: "-20% 0px -62%", threshold: [0, .12, .35] });
-sections.forEach((id) => { const section = document.getElementById(id); if (section) sectionObserver.observe(section); });
+function updateActiveSection() {
+  const marker = scrollY + document.querySelector(".site-header").offsetHeight + 140;
+  let current = "top";
+  sections.forEach((id) => {
+    const section = document.getElementById(id);
+    if (section && section.offsetTop <= marker) current = id;
+  });
+  if (scrollY + innerHeight >= document.documentElement.scrollHeight - 8) current = "message";
+  navLinks.forEach((link) => link.classList.toggle("active", link.dataset.nav === current));
+}
+function updatePagePosition() {
+  updateScrollProgress();
+  updateActiveSection();
+}
+addEventListener("scroll", updatePagePosition, { passive: true });
+addEventListener("resize", updatePagePosition);
+updatePagePosition();
+
+document.querySelector(".wordmark").addEventListener("click", (event) => {
+  event.preventDefault();
+  scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  history.replaceState(null, "", `${location.pathname}${location.search}`);
+});
 
 let revealObserver;
 function refreshReveal() {
