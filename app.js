@@ -3,14 +3,14 @@ const publications = [
     role: "第一作者", filters: ["lead", "edu-ai", "methods"], journal: "British Journal of Educational Technology", year: "2026",
     pdf: "assets/publications/bjet-ai-srl-meta-analysis.pdf", doi: "https://doi.org/10.1111/bjet.70058",
     title: "AI support in self-regulated learning: A decade of technological evolution and meta-analysis",
-    tags: ["中科院 1 区", "TOP", "SSCI Q1", "IF 13.0"],
+    tags: ["中科院 1 区 · TOP", "SSCI Q1", "IF 13.0"],
     summary: "整合 35 项研究与 133 个效应量，检验人工智能支持自我调节学习的总体作用、阶段差异与边界条件。"
   },
   {
     role: "唯一通讯作者", filters: ["lead", "methods"], journal: "Information Processing & Management", year: "2027",
     pdf: "assets/publications/ipm-official-or-influencer.pdf", doi: "https://doi.org/10.1016/j.ipm.2026.105068",
     title: "Official or Influencer? An AI-Enhanced Analytical Framework for Decoding Multimodal Persuasion in Government Marketing Videos",
-    tags: ["中科院 1 区", "TOP", "SCI/SSCI Q1", "IF 8.1"],
+    tags: ["中科院 1 区 · TOP", "SCI/SSCI Q1", "IF 8.1"],
     summary: "结合人工编码与多模态大模型分析 779 条政府营销视频，识别来源类型、内容价值与互动反应之间的关系。"
   },
   {
@@ -129,6 +129,14 @@ const projects = [
   {
     year: "2026", status: "已申报", title: "国家自然科学基金面上项目",
     description: "负责实验方案设计、平台开发技术路线论证及相关申报书撰写。", image: "assets/projects/nsfc-public.jpg", position: "top"
+  },
+  {
+    year: "2026", status: "独立开发与实验", title: "教育智能体实验平台",
+    description: "实现实验分组、大模型交互、过程支架与行为日志采集，支持教育智能体干预研究。", image: "assets/platform/multi-agent-workspace.png", position: "center"
+  },
+  {
+    year: "2026", status: "网站开发", title: "课题组成果展示平台",
+    description: "完成团队成果展示网站的界面设计、内容组织与前端实现。", image: "assets/platform/lab-platform.png", position: "center"
   }
 ];
 
@@ -141,16 +149,23 @@ const dialogTitle = document.querySelector("#media-title");
 
 function renderPublications(filter = "all") {
   const visible = publications.filter((item) => filter === "all" || item.filters.includes(filter));
+  const tagClass = (tag) => {
+    if (tag.includes("中科院 1 区")) return "tag tag-top";
+    if (tag.includes("Q1")) return "tag tag-q1";
+    if (tag.includes("SSCI Q2")) return "tag tag-q2";
+    if (tag.includes("CSSCI")) return "tag tag-cssci";
+    return "tag";
+  };
   publicationList.innerHTML = visible.map((item, index) => `
     <article class="publication-item reveal">
       <span class="publication-index">${String(index + 1).padStart(2, "0")}</span>
       <div class="publication-main">
         <h3>${item.title}</h3>
-        <p class="publication-meta"><em>${item.journal}</em> · ${item.year} · ${item.role}</p>
+        <p class="publication-meta"><em>${item.journal}</em> · ${item.year} · <strong class="author-role">${item.role}</strong></p>
         <p class="publication-summary">${item.summary}</p>
       </div>
       <div class="publication-side">
-        <div class="publication-tags">${item.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>
+        <div class="publication-tags">${item.tags.map((tag) => `<span class="${tagClass(tag)}">${tag}</span>`).join("")}</div>
         <div class="publication-actions">
           <button class="read-publication" type="button" data-pdf="${item.pdf}" data-title="${item.journal}｜${item.title}">站内阅读全文</button>
           <a class="doi-link" href="${item.doi}" target="_blank" rel="noreferrer">DOI ↗</a>
@@ -165,7 +180,7 @@ function renderOngoing() {
   ongoingList.innerHTML = ongoingStudies.map((item, index) => `
     <article class="ongoing-card" style="z-index:${index + 1}">
       <div class="ongoing-card-copy">
-        <span>${item.status} · ${item.role}</span>
+        <span>${item.status} · <strong>${item.role}</strong></span>
         <h3>${item.title}</h3>
         <p><strong>${item.journal}</strong></p>
         <p>${item.note}</p>
@@ -178,7 +193,7 @@ function renderOngoing() {
 
 function renderProjects() {
   projectAccordion.innerHTML = projects.map((item, index) => `
-    <article class="project-panel ${index === 0 ? "active" : ""}" tabindex="0">
+    <article class="project-panel reveal">
       <img src="${item.image}" alt="${item.title}证明截图" style="object-position:${item.position}">
       <div class="project-copy">
         <small>${item.year} · ${item.status}</small>
@@ -187,13 +202,8 @@ function renderProjects() {
         <button class="evidence-button" type="button" data-image="${item.image}" data-title="${item.title}">查看证明截图</button>
       </div>
     </article>`).join("");
-  projectAccordion.querySelectorAll(".project-panel").forEach((panel) => {
-    panel.addEventListener("click", () => {
-      projectAccordion.querySelectorAll(".project-panel").forEach((item) => item.classList.remove("active"));
-      panel.classList.add("active");
-    });
-  });
   bindMediaButtons();
+  refreshReveal();
 }
 
 function openMedia({ pdf, image, title }) {
@@ -244,7 +254,7 @@ function updateScrollProgress() {
 addEventListener("scroll", updateScrollProgress, { passive: true });
 updateScrollProgress();
 
-const sections = ["top", "research", "publications", "ongoing", "projects", "capabilities", "message"];
+const sections = ["top", "research", "publications", "ongoing", "projects", "experience", "message"];
 const navLinks = [...document.querySelectorAll("[data-nav]")];
 const sectionObserver = new IntersectionObserver((entries) => {
   const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -269,11 +279,7 @@ function refreshReveal() {
 function initMotion() {
   if (!window.gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   gsap.registerPlugin(ScrollTrigger);
-  gsap.from(".hero-platform", { scale: .88, opacity: 0, rotate: -1.5, duration: 1.25, ease: "power3.out" });
-  gsap.from(".hero-portrait", { y: 50, opacity: 0, duration: 1, delay: .28, ease: "power3.out" });
-  gsap.utils.toArray(".platform-gallery figure").forEach((figure) => {
-    gsap.fromTo(figure, { scale: .9, opacity: .35 }, { scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: figure, start: "top 92%", end: "center 55%", scrub: true } });
-  });
+  gsap.from(".hero-photo", { scale: .92, opacity: 0, rotate: 1.2, duration: 1.15, ease: "power3.out" });
   gsap.utils.toArray(".ongoing-card").forEach((card, index) => {
     gsap.from(card, { y: 80, opacity: 0, scale: .96, duration: .8, delay: index * .04, scrollTrigger: { trigger: card, start: "top 92%" } });
   });
@@ -299,6 +305,8 @@ messageForm.addEventListener("submit", async (event) => {
   submit.disabled = true;
   messageStatus.textContent = "正在发送……";
   const values = Object.fromEntries(new FormData(messageForm));
+  if (values.contact) values.message = `${values.message}\n\n联系方式：${values.contact}`.slice(0, 1000);
+  delete values.contact;
   try {
     await api("/api/message", { method: "POST", body: JSON.stringify(values) });
     messageForm.reset();
@@ -311,11 +319,12 @@ messageForm.addEventListener("submit", async (event) => {
 function recordVisit() {
   if (!apiBase) return;
   const eventId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
-  const payload = { eventId, path: location.pathname, referrer: document.referrer };
+  const pagePath = `${location.pathname}${location.search}`;
+  const payload = { eventId, path: pagePath, referrer: document.referrer };
   fetch(`${apiBase}/api/visit`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload), keepalive: true })
     .catch(() => {
       const pixel = new Image();
-      pixel.src = `${apiBase}/api/visit.gif?event_id=${encodeURIComponent(eventId)}&path=${encodeURIComponent(location.pathname)}&referrer=${encodeURIComponent(document.referrer)}&t=${Date.now()}`;
+      pixel.src = `${apiBase}/api/visit.gif?event_id=${encodeURIComponent(eventId)}&path=${encodeURIComponent(pagePath)}&referrer=${encodeURIComponent(document.referrer)}&t=${Date.now()}`;
     });
 }
 

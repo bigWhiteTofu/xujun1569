@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>正在进入徐俊的个人主页</title>
+  <style>body{margin:0;min-height:100svh;display:grid;place-items:center;color:#17313d;background:#f6f4ed;font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif}p{padding:24px}</style>
+</head>
+<body>
+  <p>正在进入徐俊的个人主页……</p>
+  <script src="../config.js"></script>
+  <script>
+    (() => {
+      const apiBase = (window.SITE_CONFIG?.apiBase || "").replace(/\/$/, "");
+      const eventId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+      const path = `${location.pathname}?entry=in`;
+      if (apiBase) {
+        fetch(`${apiBase}/api/visit`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ eventId, path, referrer: document.referrer }),
+          keepalive: true
+        }).catch(() => {});
+        const pixel = new Image();
+        pixel.src = `${apiBase}/api/visit.gif?event_id=${encodeURIComponent(eventId)}&path=${encodeURIComponent(path)}&referrer=${encodeURIComponent(document.referrer)}&t=${Date.now()}`;
+      }
+      setTimeout(() => location.replace("../?from=in"), 450);
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0;url=../?from=in"></noscript>
+</body>
+</html>
