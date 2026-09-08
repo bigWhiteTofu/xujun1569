@@ -30,37 +30,6 @@
     }),
   );
 
-  const questionButtons = $$("[data-question]");
-  const cards = $$(".question-card");
-  $(".question-picker").hidden = false;
-  $(".question-deck").classList.add("interactive");
-  function selectQuestion(index) {
-    questionButtons.forEach((button, i) =>
-      button.setAttribute("aria-pressed", String(i === index)),
-    );
-    cards.forEach((card, i) => {
-      card.hidden = i !== index;
-    });
-    if (window.gsap && !reducedMotion.matches) {
-      gsap.fromTo(
-        cards[index],
-        { y: 12, opacity: 0.6 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.35,
-          clearProps: "transform,opacity",
-          overwrite: true,
-        },
-      );
-    }
-    window.ScrollTrigger?.refresh();
-  }
-  questionButtons.forEach((button, i) =>
-    button.addEventListener("click", () => selectQuestion(i)),
-  );
-  selectQuestion(0);
-
   const filters = $$("[data-filter]");
   $(".filters").hidden = false;
   function filterPapers(topic) {
@@ -82,8 +51,8 @@
   filters.forEach((button) =>
     button.addEventListener("click", () => filterPapers(button.dataset.filter)),
   );
-  $$(".question-reading").forEach((link) =>
-    link.addEventListener("click", () => filterPapers("all")),
+  $$(".atlas-direction").forEach((detail) =>
+    detail.addEventListener("toggle", () => window.ScrollTrigger?.refresh()),
   );
   // A direct paper link must remain visible even after a topic filter was used.
   addEventListener("hashchange", () => {

@@ -1,0 +1,267 @@
+// The atlas describes research interests. It has no paper navigation or causal arrows.
+export const topics = ["learning", "knowledge", "community", "society"];
+export const atlas = {
+  en: {
+    title: "Different paths.<br>A connected curiosity.",
+    label: "Research atlas",
+    intro:
+      "My research moves between people, learning, and the systems around them. This is how those interests connect.",
+    center: ["People, learning", "& technology"],
+    hint: "A portrait made of the ideas I keep returning to.",
+    methodsLabel: "Ways of looking",
+    methods: [
+      "Evidence synthesis",
+      "Learning analytics",
+      "Empirical modelling",
+    ],
+    portraitAlt: "Jun in front of a chalkboard covered with mathematical notes",
+    portraitNote: "Somewhere between a question and an answer.",
+    fieldTitle: "And a little<br>room to wander.",
+    fieldText:
+      "A little room beyond the screen. Same curiosity, a different view.",
+    originalTitle: "Original Chinese title",
+    translation: "English title from the paper",
+    pdf: "Read PDF",
+    sort: "Newest first",
+    directions: [
+      {
+        name: "Learning & AI",
+        detail: "Learning with support, thinking for ourselves.",
+        text: "I explore how learners plan, monitor, and reflect—and how AI can support those processes while leaving room for their own judgment.",
+        keywords: [
+          "Self-regulated learning",
+          "Educational agents",
+          "AI literacy",
+          "Human–AI interaction",
+        ],
+      },
+      {
+        name: "Knowledge & trust",
+        detail: "From information to understanding.",
+        text: "I’m interested in how people interpret information, decide what to trust, and share what they know across social and digital spaces.",
+        keywords: [
+          "Information processing",
+          "Knowledge sharing",
+          "Multimodal communication",
+          "Trust",
+        ],
+      },
+      {
+        name: "Teachers & communities",
+        detail: "The people around the learner.",
+        text: "Learning also takes shape through relationships. I study mentoring, teachers’ professional development, and the communities that sustain participation.",
+        keywords: [
+          "Mentoring",
+          "Professional capital",
+          "Teacher development",
+          "Educational leadership",
+        ],
+      },
+      {
+        name: "Digital society",
+        detail: "Widening the lens to systems.",
+        text: "Beyond individual learning, I examine how digital technologies and public policy relate to organisational resilience and innovation.",
+        keywords: [
+          "Digital transformation",
+          "Resilience",
+          "Urban innovation",
+          "Policy evaluation",
+        ],
+      },
+    ],
+  },
+  zh: {
+    title: "沿着不同路径，<br>走向相连的问题。",
+    label: "研究图谱",
+    intro:
+      "我的研究在学习者、人与人的关系，以及周围的技术和社会系统之间展开。这张图记录它们如何相连。",
+    center: ["人、学习", "与技术"],
+    hint: "把反复思考的词，写进一张肖像。",
+    methodsLabel: "观察问题的方法",
+    methods: ["证据综合", "学习分析", "实证建模"],
+    portraitAlt: "徐俊站在写满数学笔记的黑板前",
+    portraitNote: "在问题与答案之间，继续探索。",
+    fieldTitle: "也留一点，<br>漫游的余地。",
+    fieldText: "屏幕之外，也留一点空间。换个风景，好奇心依旧。",
+    originalTitle: "中文原题",
+    translation: "论文所附英文题名",
+    pdf: "阅读 PDF",
+    sort: "年份从新到旧",
+    directions: [
+      {
+        name: "学习与 AI",
+        detail: "有支持的学习，有自己的思考。",
+        text: "我关注学习者如何计划、监控与反思，以及 AI 如何支持这些过程，同时为学习者自己的判断留出空间。",
+        keywords: ["自我调节学习", "教育智能体", "AI 素养", "人机交互"],
+      },
+      {
+        name: "知识与信任",
+        detail: "从获得信息，到形成理解。",
+        text: "我关心人们如何解读信息、判断什么值得信任，以及如何在社会交往与数字空间中分享知识。",
+        keywords: ["信息加工", "知识共享", "多模态传播", "信任"],
+      },
+      {
+        name: "教师与共同体",
+        detail: "看见学习者身边的人。",
+        text: "学习也在人与人的关系中发生。我研究指导关系、教师专业发展，以及支持持续参与的共同体。",
+        keywords: ["指导关系", "专业资本", "教师发展", "教育领导力"],
+      },
+      {
+        name: "数字社会",
+        detail: "把视野扩展到系统。",
+        text: "从个体学习向外延伸，我也考察数字技术和公共政策与组织韧性、创新之间的关系。",
+        keywords: ["数字化转型", "韧性", "城市创新", "政策评估"],
+      },
+    ],
+  },
+};
+
+// Bibliographic facts are transcribed from the existing published-work collection.
+// Year means the recorded journal year; it is not an inferred online-first date.
+export const papers = [
+  {
+    id: "persuasion",
+    topic: "knowledge",
+    year: "2027",
+    journal: "Information Processing & Management",
+    doi: "https://doi.org/10.1016/j.ipm.2026.105068",
+    pdf: "ipm-official-or-influencer.pdf",
+    title:
+      "Official or Influencer? An AI-Enhanced Analytical Framework for Decoding Multimodal Persuasion in Government Marketing Videos",
+    en: "Human coding and multimodal language models examine how source type and content relate to audience engagement across 779 government marketing videos.",
+    zh: "结合人工编码与多模态大模型分析 779 条政府营销视频，考察来源类型、内容与受众互动之间的关系。",
+  },
+  {
+    id: "srl",
+    topic: "learning",
+    year: "2026",
+    journal: "British Journal of Educational Technology",
+    doi: "https://doi.org/10.1111/bjet.70058",
+    pdf: "bjet-ai-srl-meta-analysis.pdf",
+    title:
+      "AI support in self-regulated learning: A decade of technological evolution and meta-analysis",
+    en: "How does AI support different phases of self-regulated learning? A meta-analysis of 35 studies examines the effects and the conditions that shape them.",
+    zh: "AI 如何支持自我调节学习的不同阶段？这项纳入 35 项研究的元分析考察其作用，以及影响这些作用的条件。",
+  },
+  {
+    id: "literacy",
+    topic: "learning",
+    year: "2026",
+    journal: "Behaviour & Information Technology",
+    doi: "https://doi.org/10.1080/0144929X.2026.2711024",
+    pdf: "bit-ai-literacy-review.pdf",
+    title:
+      "Mapping the evolving landscape of AI literacy research: An integrative review combining bibliometric analysis and thematic synthesis",
+    en: "What do we mean by AI literacy? Bibliometric analysis and thematic synthesis trace how this research field is taking shape.",
+    zh: "当我们谈论 AI 素养时，究竟在谈什么？文献计量与主题综合呈现这一研究领域逐渐形成的知识结构。",
+  },
+  {
+    id: "agents",
+    topic: "learning",
+    year: "2026",
+    journal: "现代远程教育研究",
+    doi: "https://doi.org/10.3969/j.issn.1009-5195.2026.04.009",
+    pdf: "mder-proactive-educational-agent.pdf",
+    title: "主动式教育智能体的构建与应用",
+    titleEn: "Construction and Application of Proactive Educational Agents",
+    en: "An exploration of the technical framework, core capabilities, and educational applications of proactive agents.",
+    zh: "讨论主动式教育智能体的技术框架、关键能力与教育应用路径。",
+  },
+  {
+    id: "trust",
+    topic: "knowledge",
+    year: "2026",
+    journal: "Aslib Journal of Information Management",
+    doi: "https://doi.org/10.1108/AJIM-01-2026-0111",
+    pdf: "aslib-danmaku-engagement.pdf",
+    title:
+      "Trust the messenger, then the message: Unpacking the cross-route logic of danmaku engagement",
+    en: "What happens when knowledge videos meet real-time audience comments? A study of source cues, trust, and knowledge adoption on Bilibili.",
+    zh: "知识视频与实时弹幕相遇，会发生什么？这项研究关注 B 站情境中的来源线索、信任与知识采纳。",
+  },
+  {
+    id: "workshops",
+    topic: "community",
+    year: "2026",
+    journal: "Journal of Professional Capital and Community",
+    doi: "https://doi.org/10.1108/JPCC-12-2025-0145",
+    pdf: "jpcc-blended-teacher-workshops.pdf",
+    title:
+      "From access to adherence: Fostering professional capital and continued engagement in blended teacher workshops",
+    en: "How does initial access become continued participation? A study of technology acceptance, expectation confirmation, and social support in blended teacher workshops.",
+    zh: "从最初使用到持续参与，教师研修经历了什么？研究结合技术接受、期望确认与社会支持视角，理解混合式研修的参与机制。",
+  },
+  {
+    id: "cities",
+    topic: "society",
+    year: "2026",
+    journal: "Humanities and Social Sciences Communications",
+    doi: "https://doi.org/10.1057/s41599-026-06673-7",
+    pdf: "hssc-smart-city.pdf",
+    title:
+      "Smart city strategy, China’s urban innovation and policy effectiveness",
+    en: "An evaluation of smart-city policy and urban innovation using panel data from Chinese cities and difference-in-differences analysis.",
+    zh: "利用中国城市面板数据与双重差分分析，评估智慧城市政策与城市创新之间的关系。",
+  },
+  {
+    id: "interpretability",
+    topic: "learning",
+    year: "2025",
+    journal: "开放教育研究",
+    doi: "https://doi.org/10.13966/j.cnki.kfjyyj.2025.06.004",
+    pdf: "oer-llm-thinking-model.pdf",
+    title: "大模型运思模式的可解释性：基于完形论与言行论整合的心设模型",
+    titleEn:
+      "The Explainability of Large Language Models’ Operational Thinking Patterns: The Construction of a Mental Model Integrating Gestalt Metaphor and Speech Act Theory",
+    en: "A conceptual account of how large-model thinking patterns can be interpreted through an integration of Gestalt theory and speech-act theory.",
+    zh: "从完形论与言行论的整合视角，讨论大模型运思模式的可解释性，并提出相应的心设模型。",
+  },
+  {
+    id: "mentoring",
+    topic: "community",
+    year: "2025",
+    journal: "International Journal of Mentoring and Coaching in Education",
+    doi: "https://doi.org/10.1108/IJMCE-07-2023-0064",
+    pdf: "ijmce-mentoring.pdf",
+    title:
+      "The role of teachers’ direct and emotional mentoring in shaping undergraduates’ research aspirations: A social cognitive career theory perspective",
+    en: "How do direct mentoring and emotional support relate to undergraduates’ research aspirations? An examination through social cognitive career theory.",
+    zh: "直接指导与情感支持如何关联本科生的科研志向？研究从社会认知职业理论视角考察其中的关系。",
+  },
+  {
+    id: "resilience",
+    topic: "society",
+    year: "2025",
+    journal: "Business Process Management Journal",
+    doi: "https://doi.org/10.1108/BPMJ-04-2025-0550",
+    pdf: "bpmj-supply-chain-resilience.pdf",
+    title:
+      "Stage-specific impacts of digital technologies on supply chain resilience: Meta-analytic evidence for continuous process improvement",
+    en: "A synthesis of 70 studies compares how digital technologies relate to different phases of supply chain resilience.",
+    zh: "综合 70 项研究，比较数字技术在供应链韧性不同阶段的差异化作用。",
+  },
+  {
+    id: "sharing",
+    topic: "knowledge",
+    year: "2024",
+    journal: "Journal of Information Science",
+    doi: "https://doi.org/10.1177/01655515241293754",
+    pdf: "jis-mobile-social-media.pdf",
+    title:
+      "The impact of mobile social media on knowledge sharing among vocational school teachers: A social cognitive career perspective",
+    en: "How do teachers share what they know? A study of the psychological and technological factors behind knowledge sharing through mobile social media.",
+    zh: "教师如何分享自己所知？这项研究考察移动社交媒体情境下知识共享背后的心理与技术因素。",
+  },
+  {
+    id: "leadership",
+    topic: "community",
+    year: "2024",
+    journal: "SAGE Open",
+    doi: "https://doi.org/10.1177/21582440241285763",
+    pdf: "sage-educational-leadership.pdf",
+    title:
+      "Evolution and current research status of educational leadership theory: A content analysis-based study",
+    en: "Content analysis traces the development, major themes, and changing landscape of educational leadership theory.",
+    zh: "通过内容分析，梳理教育领导理论的发展脉络、主要研究主题及演进趋势。",
+  },
+];

@@ -3,7 +3,8 @@ import { readFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { execFileSync } from "node:child_process";
-import { copy, papers } from "./home-content.mjs";
+import { copy } from "./home-content.mjs";
+import { atlas, papers, topics } from "./research-content.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (path) => readFile(resolve(root, path), "utf8");
@@ -22,6 +23,22 @@ function sameKeys(a, b, path = "") {
       sameKeys(a[key], b[key], `${path}.${key}`);
 }
 sameKeys(copy.en, copy.zh);
+sameKeys(atlas.en, atlas.zh);
+check(papers.length === 12, "All 12 published papers included");
+check(
+  new Set(papers.map((p) => p.doi)).size === papers.length,
+  "No duplicate publications",
+);
+check(
+  papers.every(
+    (p, i) => i === 0 || Number(papers[i - 1].year) >= Number(p.year),
+  ),
+  "Publication years descend",
+);
+check(
+  papers.every((p) => topics.includes(p.topic)),
+  "Every publication has a valid topic",
+);
 for (const [file, lang] of [
   ["index.html", "en"],
   ["zh/index.html", "zh-CN"],
@@ -52,7 +69,7 @@ for (const [file, lang] of [
       `${file}: public/application separation`,
     );
     check(
-      (html.match(/class="paper"/g) || []).length === 4,
+      (html.match(/class="paper"/g) || []).length === papers.length,
       `${file}: static papers without JavaScript`,
     );
     check(html.includes('hreflang="x-default"'), `${file}: language discovery`);
