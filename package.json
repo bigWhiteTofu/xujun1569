@@ -1,0 +1,11 @@
+{
+  "name": "jun-xu-personal-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-home.mjs",
+    "check": "node scripts/check-site.mjs",
+    "test": "node --test scripts/home.test.mjs",
+    "preview": "node scripts/mock-server.mjs"
+  },
+  "devDependencies": { "jsdom": "26.1.0" }
+}

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="徐俊的个人学术主页：教育人工智能、学习分析、自我调节学习与教育智能体研究。">
+  <link rel="canonical" href="https://bigwhitetofu.github.io/xujun1569/ph1/">
+  <meta name="theme-color" content="#15384b">
+  <title>徐俊｜教育技术学研究</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles.css?v=20260825-1">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="返回首页">
+      <span class="wordmark-seal">JX</span>
+      <span><strong>徐俊</strong><small>JUN XU</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">导航</button>
+    <nav class="site-nav" id="site-nav" aria-label="主要导航">
+      <a href="#top" data-nav="top">首页</a>
+      <a href="#research" data-nav="research">研究方向</a>
+      <a href="#publications" data-nav="publications">已发表</a>
+      <a href="#ongoing" data-nav="ongoing">进行中</a>
+      <a href="#projects" data-nav="projects">课题与开发</a>
+      <a href="#experience" data-nav="experience">教育经历</a>
+      <a href="#message" data-nav="message">留言</a>
+    </nav>
+    <span class="scroll-progress" id="scroll-progress" aria-hidden="true"></span>
+  </header>
+
+  <main id="main">
+    <section class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Educational technology · Learning sciences</p>
+        <h1 id="hero-title">在教育、技术与人的真实互动中，寻找可验证的答案。</h1>
+        <p class="hero-lead">我是徐俊，华东师范大学教育技术学硕士研究生。我的研究聚焦教育人工智能、学习分析与自我调节学习，关注智能系统如何支持学习者形成可迁移的能力。</p>
+        <div class="hero-links">
+          <a class="button button-primary" href="#publications">查看研究成果</a>
+          <a class="button button-secondary" href="https://orcid.org/0000-0002-0557-2046" target="_blank" rel="noreferrer">ORCID 0000-0002-0557-2046 ↗</a>
+        </div>
+        <p class="hero-meta"><a href="http://www.deit.ecnu.edu.cn/" target="_blank" rel="noreferrer">华东师范大学 · 教育信息技术学系 ↗</a><br><a href="https://faculty.ecnu.edu.cn/_s8/wyh/main.psp" target="_blank" rel="noreferrer">硕士导师：吴永和 研究员 ↗</a><br><a href="https://homepage.zjut.edu.cn/lhj/" target="_blank" rel="noreferrer">本科导师：李浩君 教授 ↗</a></p>
+      </div>
+      <div class="hero-art" aria-label="徐俊在黑板前的照片">
+        <figure class="hero-photo"><img src="../assets/jun-chalkboard.jpg" alt="徐俊在黑板前"></figure>
+        <span class="hero-note">JUN XU · SHANGHAI</span>
+      </div>
+    </section>
+
+    <section class="overview section-shell" aria-label="学术概览">
+      <a href="#publications"><strong>12</strong><span>篇已发表论文</span></a>
+      <a href="#publications"><strong>9 + 2</strong><span>SSCI/SCI 与 CSSCI 成果</span></a>
+      <a href="#ongoing"><strong>5</strong><span>项第一／通讯作者在研论文</span></a>
+      <a href="#experience"><strong>21</strong><span>次国际期刊同行评审</span></a>
+    </section>
+
+    <section class="research-atlas section-shell" id="research" aria-labelledby="research-title">
+      <div class="research-atlas-copy reveal">
+        <p class="eyebrow">Research atlas</p>
+        <h2 id="research-title">研究图谱</h2>
+        <p>从学习者如何调节自身过程出发，连接教育智能体设计、学习分析与实证研究。</p>
+        <div class="research-pillars" aria-label="核心研究方向">
+          <span>Educational AI</span><span>Self-regulated Learning</span><span>Learning Analytics</span>
+        </div>
+      </div>
+      <figure class="wordcloud-art reveal"><img src="../assets/research-wordcloud.png" alt="由徐俊证件照与英文研究方向组成的研究词云图"></figure>
+    </section>
+
+    <section class="publications" id="publications" aria-labelledby="publications-title">
+      <div class="section-shell">
+        <div class="section-heading publication-heading reveal">
+          <div><p class="eyebrow">Published work</p><h2 id="publications-title">已发表成果</h2></div>
+        </div>
+        <div class="publication-filter reveal" role="group" aria-label="筛选论文">
+          <button class="filter-button active" type="button" data-filter="all">全部</button>
+          <button class="filter-button" type="button" data-filter="lead">第一／通讯作者</button>
+        </div>
+        <div class="publication-list" id="publication-list"></div>
+      </div>
+    </section>
+
+    <section class="ongoing section-shell" id="ongoing" aria-labelledby="ongoing-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Work in progress</p>
+        <h2 id="ongoing-title">进行中的研究</h2>
+      </div>
+      <div class="ongoing-stack" id="ongoing-list"></div>
+    </section>
+
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-shell">
+        <div class="section-heading projects-heading reveal">
+          <div><p class="eyebrow">Projects & development</p><h2 id="projects-title">课题参与与平台开发</h2></div>
+        </div>
+        <div class="projects-layout">
+          <figure class="projects-portrait reveal"><img src="../assets/jun-teaching.png" alt="徐俊担任高等数学兼职助教"><figcaption>高等数学兼职助教 · 学院聘用</figcaption></figure>
+          <div class="project-accordion" id="project-accordion"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="method-marquee" aria-label="研究方法与技术关键词">
+      <div class="marquee-track">
+        <span>准实验</span><span>元分析</span><span>结构方程模型</span><span>学习分析</span><span>教育数据挖掘</span><span>认知网络分析</span><span>滞后序列分析</span><span>多智能体</span><span>Python</span><span>准实验</span><span>元分析</span><span>结构方程模型</span><span>学习分析</span><span>教育数据挖掘</span><span>认知网络分析</span><span>滞后序列分析</span><span>多智能体</span><span>Python</span>
+      </div>
+    </div>
+
+    <section class="experience section-shell" id="experience" aria-labelledby="experience-title">
+      <div class="experience-intro reveal">
+        <p class="eyebrow">Education & academic practice</p>
+        <h2 id="experience-title">教育与学术实践</h2>
+        <figure><img src="../assets/jun-grassland.jpg" alt="徐俊在草原旅行"></figure>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item reveal"><time>2024.09 — 至今</time><div><h3>华东师范大学 · 教育技术学</h3><p>教育信息技术学系学术型硕士，推免入学；GPA 3.47/4。<a class="mentor-link" href="https://faculty.ecnu.edu.cn/_s8/wyh/main.psp" target="_blank" rel="noreferrer">硕士导师：吴永和 研究员 ↗</a></p></div></article>
+        <article class="timeline-item reveal"><time>2020.09 — 2024.06</time><div><h3>浙江工业大学 · 教育技术学</h3><p>本科 GPA 3.98/5，年级 1/32；浙江省优秀毕业生、省政府奖学金、高等数学竞赛国家二等奖。<a class="mentor-link" href="https://homepage.zjut.edu.cn/lhj/" target="_blank" rel="noreferrer">本科导师：李浩君 教授 ↗</a></p></div></article>
+        <article class="timeline-item reveal"><time>2026</time><div><h3>AERA 年会长文录用并线上汇报</h3><p>围绕 AI 支持自我调节学习的阶段性效应开展国际学术交流。</p><button class="text-link" type="button" data-pdf="../assets/conference/aera-2026-paper.pdf" data-title="AERA 2026 Conference Paper">站内查看会议论文</button></div></article>
+        <article class="timeline-item reveal"><time>2025 — 2026</time><div><h3>同行评审与学生指导</h3><p>为 Journal of Educational Computing Research、Information Processing &amp; Management 等期刊完成 21 次同行评审；指导同组本科生完成毕业设计。</p></div></article>
+        <article class="timeline-item reveal"><time>语言能力</time><div><h3>英语四级 531 · 六级 441</h3><p>具备英文论文写作、审稿与国际会议汇报经验。</p></div></article>
+      </div>
+    </section>
+
+    <section class="message-section" id="message" aria-labelledby="message-title">
+      <div class="section-shell message-layout">
+        <div class="message-copy reveal">
+          <p class="eyebrow">Private message</p>
+          <h2 id="message-title">您想和我说什么？</h2>
+          <p>欢迎留下学术交流、合作建议或其他想法。相关信息仅站点所有者可见。</p>
+          <p class="contact-line">xujun1569@gmail.com<br>ORCID 0000-0002-0557-2046</p>
+        </div>
+        <form class="message-form reveal" id="message-form">
+          <label>怎么称呼您？ <small>可以留空</small><input name="displayName" maxlength="80" placeholder="您的称呼"></label>
+          <label>您的联系方式 <small>可以留空</small><input name="contact" maxlength="100" placeholder="邮箱、微信或其他联系方式"></label>
+          <label>留言内容<textarea name="message" maxlength="1000" minlength="2" required placeholder="写下您的想法……"></textarea></label>
+          <input class="honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-footer"><span id="message-count">0 / 1000</span><button class="button button-light" type="submit">私密发送</button></div>
+          <p class="form-status" id="message-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <a class="message-fab" href="#message">您想和我说什么？</a>
+  <footer class="site-footer">
+    <div><strong>徐俊 · JUN XU</strong><span>Educational technology with empirical clarity.</span></div>
+    <nav aria-label="页脚导航"><a href="mailto:xujun1569@gmail.com">Email</a><a href="https://orcid.org/0000-0002-0557-2046" target="_blank" rel="noreferrer">ORCID</a><a href="../admin.html">站点管理</a></nav>
+  </footer>
+
+  <dialog class="media-dialog" id="media-dialog">
+    <div class="dialog-bar"><strong id="media-title">材料预览</strong><button id="close-media" type="button" aria-label="关闭">关闭</button></div>
+    <div class="dialog-stage" id="dialog-stage"></div>
+  </dialog>
+
+  <script src="../config.js?v=20260824-3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js?v=20260825-1" defer></script>
+</body>
+</html>
