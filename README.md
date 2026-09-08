@@ -34,7 +34,7 @@ Interaction regression tests use JSDOM as a development-only dependency: run `np
 - `ph1/index.html`, `ph1/app.js`: original application profile, using parent-relative assets.
 - `styles.css`, `app.js`, `admin.*`, `config.js`, `worker/`: existing application/admin/API code. The original root `app.js` is retained for provenance but no longer loaded by the personal homepage.
 
-The public page uses native continuous scrolling, a sticky header, a thin reading progress bar, and an underline on the current navigation link. All four research directions start expanded. There is no wheel interception, animated page switching, or publication pagination.
+The public page uses native continuous scrolling, a sticky header, a thin reading progress bar, and an underline on the current navigation link. All four research directions remain fully visible along an illustrated, alternating research trail. There is no wheel interception, animated page switching, or publication pagination.
 
 All 12 papers are rendered statically, ordered by descending recorded journal year and thematic relevance within the same year. Each has one primary topic: Learning & AI (4), Knowledge & trust (3), Teachers & communities (3), or Digital society (2). The IPM paper retains its recorded 2027 journal year; it is not presented as a newly inferred publication date.
 

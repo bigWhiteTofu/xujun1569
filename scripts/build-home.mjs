@@ -58,8 +58,8 @@ export function renderHome(locale) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${base}home-favicon.svg" type="image/svg+xml">
   <link rel="preload" href="${base}assets/fonts/cabinet-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="${base}home.css?v=20260908-5">
-  <link rel="stylesheet" href="${base}screens.css?v=20260908-5">
+  <link rel="stylesheet" href="${base}home.css?v=20260908-6">
+  <link rel="stylesheet" href="${base}screens.css?v=20260908-6">
   <script type="application/ld+json">${JSON.stringify(structured)}</script>
 </head>
 <body id="top">
@@ -83,7 +83,20 @@ export function renderHome(locale) {
       <figure class="atlas-art"><a href="${base}assets/research-wordcloud.png" target="_blank" rel="noopener noreferrer" aria-label="${locale === "en" ? "Open the full research portrait" : "查看完整研究肖像"}"><img src="${base}assets/research-wordcloud.png" width="1536" height="1024" loading="lazy" alt="${locale === "en" ? "A typographic portrait of Jun, built from research terms including educational AI, self-regulated learning, learning analytics, human–AI collaboration, and knowledge sharing." : "由徐俊肖像与英文研究词汇组成的词云图，包含教育人工智能、自我调节学习、学习分析、人机协作与知识共享等主题。"}"></a><figcaption><span>${a.hint}</span><a href="${base}assets/research-wordcloud.png" target="_blank" rel="noopener noreferrer">${locale === "en" ? "View full size" : "查看大图"} ${arrow}</a></figcaption></figure>
     </section>
     <section id="directions" class="directions-screen shell page-screen" data-label="${t.deck.directions}" tabindex="-1" aria-labelledby="directions-title"><p class="eyebrow" id="directions-title">${t.deck.directions}</p>
-      <div class="atlas-directions">${a.directions.map((d, i) => `<details class="atlas-direction" open><summary><span class="direction-dot dot-${i}" aria-hidden="true"></span>${d.name}<span class="expand-mark" aria-hidden="true">+</span></summary><div class="direction-copy"><h3>${d.detail}</h3><p>${d.text}</p><ul>${d.keywords.map((word) => `<li>${word}</li>`).join("")}</ul></div></details>`).join("")}</div>
+      <div class="trail-heading"><h2>${locale === "en" ? "A few paths I keep returning to." : "有些问题，总想再走近一点。"}</h2><p>${locale === "en" ? "From how we learn to the worlds we build together." : "从一个人如何学习，到我们共同生活的世界。"}</p></div>
+      <div class="research-trail"><svg class="trail-path" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 C12 100 88 170 50 250 S12 420 50 500 S88 670 50 750 S12 920 50 1000"/></svg>${a.directions
+        .map(
+          (d, i) =>
+            `<article class="research-stop stop-${i}"><div class="trail-art" aria-hidden="true"><svg viewBox="0 0 200 170" fill="none">${
+              [
+                '<ellipse cx="100" cy="85" rx="77" ry="47" transform="rotate(-25 100 85)"/><ellipse cx="100" cy="85" rx="47" ry="72" transform="rotate(-25 100 85)"/><circle cx="100" cy="85" r="17"/><path d="M142 24l9 9-9 9-9-9zM27 100h16m-8-8v16"/><circle class="art-fill" cx="139" cy="131" r="6"/>',
+                '<circle cx="78" cy="78" r="45"/><circle cx="122" cy="78" r="45"/><path d="M62 136c23 15 55 15 78 0M42 20l4 12m-16-4 12 4M100 42v72"/><path class="art-fill" d="M100 46c25 18 25 46 0 64-25-18-25-46 0-64z"/>',
+                '<path d="M51 65l49 38 49-38M51 65l-8 63 57-25 57 25-8-63M51 65l49-33 49 33"/><circle cx="100" cy="32" r="14"/><circle cx="51" cy="65" r="17"/><circle cx="149" cy="65" r="17"/><circle cx="43" cy="128" r="12"/><circle cx="157" cy="128" r="12"/><circle class="art-fill" cx="100" cy="103" r="20"/>',
+                '<path d="M24 138h152M38 138V86h31v52m14 0V49h34v89m14 0V73h31v65M49 101h9m-9 14h9m37-49h10m-10 18h10m-10 18h10m39-12h7m-7 17h7M26 58c28-48 94-45 143-17"/><path d="M157 27l13 14-18 6"/><circle class="art-fill" cx="100" cy="128" r="5"/>',
+              ][i]
+            }</svg></div><span class="trail-node" aria-hidden="true"></span><div class="trail-copy"><p class="trail-topic">${d.name}</p><h3>${d.detail}</h3><p class="trail-description">${d.text}</p><ul>${d.keywords.map((word) => `<li>${word}</li>`).join("")}</ul></div></article>`,
+        )
+        .join("")}</div>
       <div class="atlas-methods"><span>${a.methodsLabel}</span><p>${a.methods.join('<span aria-hidden="true"> / </span>')}</p></div>
     </section>
     <section id="reading" class="reading shell page-screen" data-label="${t.nav[2]}" tabindex="-1" aria-labelledby="reading-title"><div class="section-heading"><h2 id="reading-title">${t.readingTitle}</h2><p>${t.readingIntro}</p></div>
@@ -109,8 +122,8 @@ export function renderHome(locale) {
   </main>
   <footer class="footer shell"><a class="footer-signature" href="#top">${t.name}<span aria-hidden="true">✳</span></a><p>${t.footer}</p><a href="#top">${t.top}<span aria-hidden="true">↑</span></a></footer>
   <script src="${base}config.js?v=20260824-3" defer></script>
-  <script src="${base}home.js?v=20260908-5" defer></script>
-  <script src="${base}screens.js?v=20260908-5" defer></script>
+  <script src="${base}home.js?v=20260908-6" defer></script>
+  <script src="${base}screens.js?v=20260908-6" defer></script>
 </body>
 </html>
 `;

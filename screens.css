@@ -285,3 +285,202 @@ html[lang="zh-CN"] .hero h1 {
     border-top: 1px solid var(--line);
   }
 }
+
+/* Four research paths: open notes connected by a wandering line. */
+.trail-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 50px;
+  margin: 20px 0 65px;
+}
+.trail-heading h2 {
+  max-width: 620px;
+  font-size: clamp(32px, 3.6vw, 48px);
+}
+.trail-heading > p {
+  max-width: 250px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.research-trail {
+  position: relative;
+}
+.trail-path {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 50px);
+  width: 100px;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.trail-path path {
+  fill: none;
+  stroke: #b8bba6;
+  stroke-width: 1.4px;
+  stroke-dasharray: 3 7;
+  vector-effect: non-scaling-stroke;
+}
+.research-stop {
+  --trail-color: #577c73;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
+  align-items: center;
+  padding-block: 35px 55px;
+}
+.stop-1 {
+  --trail-color: #405d78;
+}
+.stop-2 {
+  --trail-color: #af6b47;
+}
+.stop-3 {
+  --trail-color: #7f8552;
+}
+.trail-art {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  width: clamp(155px, 20vw, 240px);
+  color: var(--trail-color);
+  transform: rotate(-5deg);
+  transition: transform 0.5s ease;
+}
+.trail-art svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.trail-art .art-fill {
+  fill: currentColor;
+  fill-opacity: 0.18;
+}
+.research-stop:nth-of-type(even) .trail-art {
+  grid-column: 3;
+  transform: rotate(5deg);
+}
+.research-stop:hover .trail-art {
+  transform: rotate(0deg) translateY(-4px);
+}
+.trail-node {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  width: 13px;
+  height: 13px;
+  background: var(--trail-color);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px var(--trail-color),
+    0 0 0 9px var(--paper);
+}
+.trail-copy {
+  grid-column: 3;
+  grid-row: 1;
+  padding-left: 28px;
+}
+.research-stop:nth-of-type(even) .trail-copy {
+  grid-column: 1;
+  padding: 0 28px 0 0;
+}
+.trail-topic {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  color: var(--trail-color);
+  margin-bottom: 15px;
+}
+.trail-copy h3 {
+  font: 400 clamp(24px, 2.5vw, 33px) / 1.25 var(--serif);
+  letter-spacing: -0.025em;
+  max-width: 440px;
+}
+.trail-description {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.trail-copy ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+  gap: 8px 16px;
+}
+.trail-copy li {
+  font-size: 12px;
+  color: var(--trail-color);
+}
+.trail-copy li::before {
+  content: "↗";
+  margin-right: 6px;
+  opacity: 0.65;
+}
+.directions-screen .atlas-methods {
+  border-top: 1px solid var(--line);
+  margin-top: 30px;
+}
+html[lang="zh-CN"] .trail-copy h3 {
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .trail-heading {
+    display: block;
+    margin-bottom: 35px;
+  }
+  .trail-heading h2 {
+    font-size: 32px;
+  }
+  .trail-heading > p {
+    max-width: none;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  .trail-path {
+    left: -24px;
+    width: 80px;
+  }
+  .research-stop {
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding-block: 12px 40px;
+  }
+  .trail-art,
+  .research-stop:nth-of-type(even) .trail-art {
+    grid-column: 2;
+    grid-row: 1;
+    width: 125px;
+    justify-self: start;
+    margin-left: 18px;
+  }
+  .trail-node {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .trail-copy,
+  .research-stop:nth-of-type(even) .trail-copy {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 12px 0 0 18px;
+  }
+  .trail-copy h3 {
+    font-size: 26px;
+  }
+  .trail-description {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+  .trail-copy ul {
+    margin-top: 16px;
+    gap: 7px 12px;
+  }
+}
