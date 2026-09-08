@@ -58,8 +58,8 @@ export function renderHome(locale) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${base}home-favicon.svg" type="image/svg+xml">
   <link rel="preload" href="${base}assets/fonts/cabinet-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="${base}home.css?v=20260908-3">
-  <link rel="stylesheet" href="${base}screens.css?v=20260908-3">
+  <link rel="stylesheet" href="${base}home.css?v=20260908-4">
+  <link rel="stylesheet" href="${base}screens.css?v=20260908-4">
   <script type="application/ld+json">${JSON.stringify(structured)}</script>
 </head>
 <body id="top">
@@ -108,8 +108,8 @@ export function renderHome(locale) {
   </main>
   <footer class="footer shell"><a class="footer-signature" href="#top">${t.name}<span aria-hidden="true">✳</span></a><p class="deck-hint">${t.deck.hint}</p><nav class="deck-controls" hidden aria-label="${t.deck.page}"><button id="previous-page" type="button" aria-label="${t.deck.previous}">↑</button><span id="deck-count" role="status" aria-live="polite"></span><button id="next-page" type="button" aria-label="${t.deck.next}">↓</button></nav></footer>
   <script src="${base}config.js?v=20260824-3" defer></script>
-  <script src="${base}home.js?v=20260908-3" defer></script>
-  <script src="${base}screens.js?v=20260908-3" defer></script>
+  <script src="${base}home.js?v=20260908-4" defer></script>
+  <script src="${base}screens.js?v=20260908-4" defer></script>
 </body>
 </html>
 `;

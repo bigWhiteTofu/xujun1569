@@ -113,7 +113,9 @@ test("wheel inertia does not skip several screens in one gesture", async (t) => 
   assert.equal(active().id, "directions");
 });
 test("long content scrolls within its screen before turning the page", async (t) => {
-  const { window, $, active } = await setup(t, { hash: "#directions" });
+  const { window, $, active, advance } = await setup(t, {
+    hash: "#directions",
+  });
   const panel = active();
   panel.style.overflowY = "auto";
   Object.defineProperty(panel, "scrollHeight", { value: 1400 });
@@ -127,6 +129,19 @@ test("long content scrolls within its screen before turning the page", async (t)
   );
   assert.equal(active().id, "directions");
   panel.scrollTop = 800;
+  panel.dispatchEvent(
+    new window.WheelEvent("wheel", {
+      deltaY: 100,
+      bubbles: true,
+      cancelable: true,
+    }),
+  );
+  assert.equal(
+    active().id,
+    "directions",
+    "the same gesture cannot escape a long panel",
+  );
+  advance(250);
   panel.dispatchEvent(
     new window.WheelEvent("wheel", {
       deltaY: 100,
@@ -161,4 +176,61 @@ test("paging stylesheet parses and reduced-motion rules remain available", async
   t.after(() => dom.window.close());
   assert.ok(dom.window.document.styleSheets[0].cssRules.length > 20);
   assert.ok(css.includes("prefers-reduced-motion"));
+});
+
+test("animated navigation queues the latest destination without leaving two active pages", async (t) => {
+  const { window, $, $$, active } = await setup(t);
+  const finishes = [];
+  window.document.startViewTransition = (update) => {
+    update();
+    let finish;
+    const finished = new Promise((resolve) => {
+      finish = resolve;
+    });
+    finishes.push(finish);
+    return {
+      finished,
+      ready: Promise.reject(new Error("Snapshot cancelled by resize")),
+      skipTransition: finish,
+    };
+  };
+  $('#site-nav a[href="#research"]').click();
+  assert.equal(active().id, "research");
+  $('#site-nav a[href="#reading"]').click();
+  $('#site-nav a[href="#hello"]').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(active().id, "hello");
+  assert.equal($$(".page-screen:not([hidden])").length, 1);
+  finishes.at(-1)();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  $("#previous-page").click();
+  assert.equal(active().id, "field");
+  assert.equal(window.document.documentElement.dataset.travel, "back");
+  finishes.at(-1)();
+});
+
+test("reduced motion skips page animations but retains working navigation", async (t) => {
+  const { window, $, active } = await setup(t);
+  window.matchMedia = () => ({ matches: true });
+  window.document.startViewTransition = () => {
+    throw new Error("Motion should be disabled");
+  };
+  $("#next-page").click();
+  assert.equal(active().id, "research");
+  $("#previous-page").click();
+  assert.equal(active().id, "home");
+});
+
+test("the fallback animates in the direction of travel and cancels stale animations", async (t) => {
+  const { $, active } = await setup(t);
+  const effects = [];
+  let cancelled = 0;
+  $("#main").getAnimations = () => [{ cancel: () => cancelled++ }];
+  $("#main").animate = (frames) => effects.push(frames);
+  $("#next-page").click();
+  $("#previous-page").click();
+  assert.equal(active().id, "home");
+  assert.equal(effects[0][0].transform, "translateY(28px)");
+  assert.equal(effects[1][0].transform, "translateY(-28px)");
+  assert.equal(cancelled, 2);
 });

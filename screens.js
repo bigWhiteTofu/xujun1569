@@ -13,6 +13,9 @@
   let lastWheel = 0;
   let gestureConsumed = false;
   let lockedUntil = 0;
+  let transition = null;
+  let queuedPage = null;
+  let initialized = false;
   const pageSize = () => (innerWidth >= 1100 && innerHeight >= 850 ? 2 : 1);
   let lastPageSize = pageSize();
 
@@ -34,7 +37,55 @@
     );
   }
 
-  function show(index, { focus = false, updateHash = true } = {}) {
+  function show(index, options = {}) {
+    const destination = Math.max(0, Math.min(steps.length - 1, index));
+    const reducedMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (transition) {
+      queuedPage = [destination, options];
+      transition.skipTransition();
+      return;
+    }
+    const animate = initialized && destination !== current && !reducedMotion;
+    document.documentElement.dataset.travel =
+      destination < current ? "back" : "forward";
+    initialized = true;
+    if (animate && typeof document.startViewTransition === "function") {
+      transition = document.startViewTransition(() =>
+        render(destination, options),
+      );
+      // Resizing or a newer navigation may cancel the visual snapshot.
+      // The DOM update still completes; a skipped animation is not a page error.
+      transition.ready?.catch(() => {});
+      transition.finished
+        .catch(() => {})
+        .finally(() => {
+          transition = null;
+          if (queuedPage) {
+            const pending = queuedPage;
+            queuedPage = null;
+            show(...pending);
+          }
+        });
+    } else {
+      render(destination, options);
+      if (animate && typeof main.animate === "function") {
+        main.getAnimations().forEach((animation) => animation.cancel());
+        const offset =
+          document.documentElement.dataset.travel === "back" ? -28 : 28;
+        main.animate(
+          [
+            { opacity: 0, transform: `translateY(${offset}px)` },
+            { opacity: 1, transform: "translateY(0)" },
+          ],
+          { duration: 480, easing: "cubic-bezier(.22,1,.36,1)" },
+        );
+      }
+    }
+  }
+
+  function render(index, { focus = false, updateHash = true } = {}) {
     current = Math.max(0, Math.min(steps.length - 1, index));
     const step = steps[current];
     screens.forEach((screen) => {
@@ -47,7 +98,7 @@
           : paper.dataset.filtered === "true";
     });
     step.screen.scrollTop = 0;
-    const label = `${step.screen.dataset.label}${step.page ? ` · ${step.page} / ${step.pages}` : ""}`;
+    const label = step.screen.dataset.label;
     document.querySelector("#deck-count").textContent =
       `${String(current + 1).padStart(2, "0")} / ${String(steps.length).padStart(2, "0")} · ${label}`;
     document.querySelector("#publication-page").textContent = step.page
@@ -164,8 +215,6 @@
         event.target.closest("input,textarea,select,[contenteditable]")
       )
         return;
-      if (canScroll(event.target, direction)) return;
-      event.preventDefault();
       const now = performance.now();
       // A fresh gesture (or a pause) is required after an inertial wheel burst.
       if (now - lastWheel > 180) {
@@ -173,6 +222,11 @@
         wheelSum = 0;
       }
       lastWheel = now;
+      if (canScroll(event.target, direction)) {
+        gestureConsumed = true;
+        return;
+      }
+      event.preventDefault();
       if (now < lockedUntil || gestureConsumed) return;
       if (Math.sign(wheelSum) !== direction) wheelSum = 0;
       wheelSum +=
