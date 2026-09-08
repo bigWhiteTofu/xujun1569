@@ -29,16 +29,16 @@ Interaction regression tests use JSDOM as a development-only dependency: run `np
 - `scripts/build-home.mjs`: shared semantic HTML template, metadata, and public sitemap generation.
 - `index.html`, `zh/index.html`, `sitemap.xml`: generated files; rebuild after copy/template changes.
 - `home.css`, `home.js`: public responsive styles and shared interactions.
-- `screens.css`, `screens.js`: the one-screen-at-a-time layout and navigation. No public-page GSAP runtime is needed.
-- `scripts/screens.test.mjs`: pagination, complete paper traversal, filters, deep links, wheel inertia, inner scrolling, and keyboard regressions.
+- `screens.css`, `screens.js`: the personal layout and native-scroll navigation.
+- `scripts/screens.test.mjs`: native scrolling, reading progress, and active-section regressions.
 - `ph1/index.html`, `ph1/app.js`: original application profile, using parent-relative assets.
 - `styles.css`, `app.js`, `admin.*`, `config.js`, `worker/`: existing application/admin/API code. The original root `app.js` is retained for provenance but no longer loaded by the personal homepage.
 
-The public page presents one screen at a time: chalkboard portrait and student introduction → research portrait/word cloud → four expanded research directions → paginated publications → grassland photograph → conversation. The header and footer remain visible. Wheel gestures, vertical swipes, keyboard paging, and previous/next controls turn pages. Long content remains scrollable within the current screen, with hidden scrollbars and a fresh wheel gesture or swipe needed to leave that screen. Page changes use directional View Transitions, with a Web Animations fallback and reduced-motion support. Only the content transitions; navigation stays still. The atlas reuses `assets/research-wordcloud.png` without altering the asset or application page. Its expandable topic descriptions do not link to papers.
+The public page uses native continuous scrolling, a sticky header, a thin reading progress bar, and an underline on the current navigation link. All four research directions start expanded. There is no wheel interception, animated page switching, or publication pagination.
 
 All 12 papers are rendered statically, ordered by descending recorded journal year and thematic relevance within the same year. Each has one primary topic: Learning & AI (4), Knowledge & trust (3), Teachers & communities (3), or Digital society (2). The IPM paper retains its recorded 2027 journal year; it is not presented as a newly inferred publication date.
 
-Core content, native expandable atlas descriptions, DOI/PDF links, and language navigation work without JavaScript. Enhanced features include discrete screen navigation, paper filters and pagination, clipboard, private notes, and reduced-motion-aware CSS transitions. Large viewports (at least 1100 × 850) show two papers per page; smaller viewports show one. Direct section and paper hashes, browser history, and bilingual links preserve navigation. Without JavaScript, every screen and paper remains readable in document order. Chinese layouts use separate type scale and line-height rules.
+Core content, DOI/PDF links, and language navigation work without JavaScript. All 12 papers appear in order; topic filters hide only nonmatching items. Anchors account for the sticky header and reduced-motion settings.
 
 Public messages use the existing `/api/message` service. The 1,000-character limit includes contact details; errors preserve the draft, submissions time out after 12 seconds, and all visible status text is localized. No live messages should be sent as part of testing.
 

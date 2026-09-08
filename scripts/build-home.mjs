@@ -58,15 +58,16 @@ export function renderHome(locale) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${base}home-favicon.svg" type="image/svg+xml">
   <link rel="preload" href="${base}assets/fonts/cabinet-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="${base}home.css?v=20260908-4">
-  <link rel="stylesheet" href="${base}screens.css?v=20260908-4">
+  <link rel="stylesheet" href="${base}home.css?v=20260908-5">
+  <link rel="stylesheet" href="${base}screens.css?v=20260908-5">
   <script type="application/ld+json">${JSON.stringify(structured)}</script>
 </head>
 <body id="top">
+  <div id="scroll-progress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">${t.skip}</a>
   <header class="masthead shell">
     <a class="wordmark" href="${base}${locale === "zh" ? "zh/" : ""}" aria-label="${t.name}"><svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 3v34M3 20h34M8 8l24 24M8 32 32 8" stroke="currentColor" stroke-width="3"/></svg><span>${t.name}<small>${locale === "en" ? "徐俊" : "JUN XU"}</small></span></a>
-    <nav id="site-nav" class="site-nav" aria-label="${locale === "en" ? "Main navigation" : "主要导航"}">${["top", "research", "reading", "hello"].map((id, i) => `<a href="#${id}">${t.nav[i]}</a>`).join("")}</nav>
+    <nav id="site-nav" class="site-nav" aria-label="${locale === "en" ? "Main navigation" : "主要导航"}">${["top", "research", "reading", "field", "hello"].map((id, i) => `<a href="#${id}">${i === 3 ? t.deck.field : t.nav[i === 4 ? 3 : i]}</a>`).join("")}</nav>
     <div class="nav-tools"><div class="language-switch" aria-label="Language / 语言"><a href="${base}" lang="en" hreflang="en" ${locale === "en" ? 'aria-current="page"' : ""}>EN</a><span aria-hidden="true">/</span><a href="${base}zh/" lang="zh-CN" hreflang="zh-CN" ${locale === "zh" ? 'aria-current="page"' : ""}>中文</a></div><button class="menu-toggle" hidden type="button" aria-expanded="false" aria-controls="site-nav">${t.menu}</button></div>
   </header>
   <main id="main" tabindex="-1">
@@ -87,7 +88,7 @@ export function renderHome(locale) {
     </section>
     <section id="reading" class="reading shell page-screen" data-label="${t.nav[2]}" tabindex="-1" aria-labelledby="reading-title"><div class="section-heading"><h2 id="reading-title">${t.readingTitle}</h2><p>${t.readingIntro}</p></div>
       <div class="reading-tools"><div class="filters" hidden role="group" aria-label="${locale === "en" ? "Filter papers by topic" : "按话题筛选论文"}">${["all", ...topics].map((filter, i) => `<button type="button" data-filter="${filter}" aria-pressed="${i === 0}">${t.filters[i]}</button>`).join("")}</div><span id="reading-count" role="status" data-suffix="${t.results}">${papers.length} ${t.results}</span></div>
-      <p class="sort-note">${a.sort} <span id="publication-page" aria-live="polite"></span></p>
+      <p class="sort-note">${a.sort}</p>
       <div class="paper-list">${papers
         .map((p, i) => {
           const translated = Boolean(p.titleEn);
@@ -106,10 +107,10 @@ export function renderHome(locale) {
       <form id="message-form" class="note-form" hidden data-sending="${t.sending}" data-sent="${t.sent}" data-failed="${t.failed}" data-limited="${t.limited}" data-length="${t.length}" data-copied="${t.copied}" data-copy-failed="${t.copyFailed}"><h3>${t.formTitle}</h3><div class="form-pair"><label>${t.nameLabel}<small>${t.optional}</small><input name="displayName" maxlength="80" autocomplete="name"></label><label>${t.contactLabel}<small>${t.optional}</small><input name="contact" maxlength="100" placeholder="${t.contactPlaceholder}"></label></div><label>${t.messageLabel}<textarea name="message" rows="4" maxlength="1000" minlength="2" required placeholder="${t.placeholder}"></textarea></label><input class="honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="form-bottom"><span id="message-count" aria-label="${t.countLabel}">0 / 1000</span><button class="button light" type="submit">${t.submit}${arrow}</button></div><p id="message-status" class="status" role="status"></p><p class="privacy">${t.privacy}</p></form>
       <noscript><p>${t.noscript}</p></noscript></div></section>
   </main>
-  <footer class="footer shell"><a class="footer-signature" href="#top">${t.name}<span aria-hidden="true">✳</span></a><p class="deck-hint">${t.deck.hint}</p><nav class="deck-controls" hidden aria-label="${t.deck.page}"><button id="previous-page" type="button" aria-label="${t.deck.previous}">↑</button><span id="deck-count" role="status" aria-live="polite"></span><button id="next-page" type="button" aria-label="${t.deck.next}">↓</button></nav></footer>
+  <footer class="footer shell"><a class="footer-signature" href="#top">${t.name}<span aria-hidden="true">✳</span></a><p>${t.footer}</p><a href="#top">${t.top}<span aria-hidden="true">↑</span></a></footer>
   <script src="${base}config.js?v=20260824-3" defer></script>
-  <script src="${base}home.js?v=20260908-4" defer></script>
-  <script src="${base}screens.js?v=20260908-4" defer></script>
+  <script src="${base}home.js?v=20260908-5" defer></script>
+  <script src="${base}screens.js?v=20260908-5" defer></script>
 </body>
 </html>
 `;

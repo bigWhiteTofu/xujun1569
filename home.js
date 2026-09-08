@@ -53,10 +53,7 @@
   );
   // A direct paper link must remain visible even after a topic filter was used.
   addEventListener("hashchange", () => {
-    if (
-      location.hash.startsWith("#paper-") &&
-      !document.documentElement.classList.contains("paged")
-    )
+    if (location.hash.startsWith("#paper-"))
       filterPapers("all");
   });
 

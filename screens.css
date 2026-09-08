@@ -1,888 +1,287 @@
-/* The base stylesheet remains a readable document when JavaScript is unavailable. */
-.hero-bio {
-  margin-top: 22px;
-  font-size: 15px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 51ch;
+/* Personal layout with native scrolling; no wheel interception or page switching. */
+:root {
+  --header-height: 80px;
 }
-.directions-screen {
-  padding-block: 60px;
+html {
+  scroll-padding-top: calc(var(--header-height) + 24px);
+  scrollbar-width: none;
 }
-.directions-screen > .eyebrow {
-  margin-bottom: 22px;
-  color: var(--accent);
+html::-webkit-scrollbar {
+  display: none;
+}
+#scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 30;
+  pointer-events: none;
 }
 .masthead {
   position: sticky;
   top: 0;
+  min-height: 80px;
   z-index: 20;
   background: var(--paper);
+}
+.site-nav {
+  gap: 26px;
 }
 .site-nav a[aria-current="location"]:after {
   transform: scaleX(1);
 }
-.hero {
-  grid-template-columns: 1fr 1.18fr;
-  gap: 48px;
+.page-screen {
+  scroll-margin-top: 0;
 }
-.hero h1 {
-  font-size: clamp(45px, 4.7vw, 70px);
-}
-.chalk-frame {
-  aspect-ratio: 4 / 3;
-}
-.deck-controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.deck-hint {
-  display: none;
-}
-.paged .deck-hint {
-  display: block;
-}
-.deck-controls button {
-  border: 1px solid var(--line);
-  color: var(--ink);
-  background: transparent;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 20px;
-  transition:
-    background 0.25s,
-    color 0.25s,
-    transform 0.25s;
-}
-.deck-controls button:hover:not(:disabled) {
-  background: var(--ink);
-  color: var(--paper);
-  transform: translateY(-2px);
-}
-.deck-controls button:active:not(:disabled) {
-  transform: translateY(1px);
-}
-.deck-controls button:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-#deck-count {
-  font-size: 12px;
-  min-width: 220px;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-#publication-page {
-  float: right;
-  font-variant-numeric: tabular-nums;
-}
-
-/* A stable frame around one page. Scrollbars stay hidden, including in form controls;
-   short viewports and zoomed text retain native scrolling so no content is lost. */
-.paged {
-  --header-height: 80px;
-  --footer-height: 60px;
-  height: 100%;
-  overflow: hidden;
-  scrollbar-width: none;
-}
-.paged body {
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) var(--footer-height);
-}
-.paged * {
-  scrollbar-width: none;
-}
-.paged *::-webkit-scrollbar,
-.paged::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-}
-.paged .masthead {
-  min-height: 80px;
-}
-.paged main {
-  min-height: 0;
-  overflow: hidden;
-  position: relative;
-  view-transition-name: page-content;
-}
-.paged .page-screen {
-  height: 100%;
-  max-height: 100%;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior-y: contain;
-  padding-block: clamp(24px, 4.5vh, 52px);
-  scroll-padding: 24px;
-}
-.paged .page-screen:focus {
-  outline: none;
-}
-.paged h1,
-.paged h2,
-.paged h3 {
+h1,
+h2,
+h3 {
   text-wrap: balance;
 }
-.paged p {
+p {
   text-wrap: pretty;
 }
-.paged h2 {
-  font-size: clamp(32px, 3.4vw, 50px);
-}
-.paged .eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.13em;
-}
-
-/* Only the page is captured; the navigation and controls remain still. */
-html.paged {
-  view-transition-name: none;
-}
-::view-transition {
-  pointer-events: none;
-}
-::view-transition-group(page-content) {
-  animation-duration: 560ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-::view-transition-old(page-content),
-::view-transition-new(page-content) {
-  mix-blend-mode: normal;
-  height: 100%;
-  animation-duration: 560ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-::view-transition-old(page-content) {
-  animation-name: page-leave;
-}
-::view-transition-new(page-content) {
-  animation-name: page-enter;
-}
-html[data-travel="back"]::view-transition-old(page-content) {
-  animation-name: page-leave-back;
-}
-html[data-travel="back"]::view-transition-new(page-content) {
-  animation-name: page-enter-back;
-}
-@keyframes page-leave {
-  to {
-    opacity: 0;
-    transform: translateY(-7%);
-  }
-}
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(9%);
-  }
-}
-@keyframes page-leave-back {
-  to {
-    opacity: 0;
-    transform: translateY(7%);
-  }
-}
-@keyframes page-enter-back {
-  from {
-    opacity: 0;
-    transform: translateY(-9%);
-  }
-}
-
-/* Home: an editorial spread with an uncropped landscape portrait. */
-.paged .hero {
+.hero {
   grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.16fr);
   gap: clamp(32px, 5vw, 76px);
-  align-content: center;
-  align-items: center;
+  padding-block: 80px 100px;
+  min-height: calc(100svh - var(--header-height));
 }
-.paged .hero h1 {
+.hero h1 {
   font-size: clamp(42px, 4.45vw, 68px);
   line-height: 1.09;
   margin: 22px 0;
 }
-.paged .hero-lead {
+.hero-lead {
   font-size: clamp(16px, 1.45vw, 20px);
-  max-width: 42ch;
   line-height: 1.65;
+  max-width: 42ch;
 }
-.paged .hero-bio {
-  font-size: 14px;
+.hero-bio {
   margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 51ch;
 }
-.paged .hero-actions {
+.hero-actions {
   margin-top: 24px;
   gap: 22px;
 }
-.paged .hero-actions .button,
-.paged .hero-actions .text-link {
+.hero-actions .button,
+.hero-actions .text-link {
   font-size: 13px;
 }
-.paged .hero-actions .button {
-  min-height: 46px;
-  padding: 10px 16px;
-}
-.paged .chalk-portrait {
-  width: 100%;
+.chalk-portrait {
   margin: 0;
   padding: 0;
   border: 0;
   background: none;
   transform: none;
+  width: 100%;
 }
-.paged .chalk-frame {
+.chalk-frame {
+  aspect-ratio: 4/3;
   border-radius: 3px;
-  aspect-ratio: 4 / 3;
-  max-height: calc(
-    100dvh - var(--header-height) - var(--footer-height) - 114px
-  );
 }
-.paged .chalk-frame img {
-  object-fit: cover;
-}
-.paged .chalk-portrait figcaption {
+.chalk-portrait figcaption {
   padding: 14px 0 0;
   font-size: 14px;
 }
-
-/* Atlas: the portrait is the focal point, with a quiet editorial margin. */
-.paged .research-atlas {
+.research-atlas {
   display: grid;
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.5fr);
   align-items: center;
-  gap: clamp(28px, 4vw, 60px);
+  gap: 60px;
+  padding-block: 95px 55px;
+  border-top: 1px solid var(--line);
 }
-.paged .research-atlas .section-heading {
+.research-atlas .section-heading {
   display: block;
   margin: 0;
 }
-.paged .research-atlas .section-heading > p {
+.research-atlas h2 {
+  font-size: clamp(32px, 3.4vw, 50px);
+}
+.research-atlas .section-heading > p {
   margin-top: 28px;
   font-size: 16px;
   line-height: 1.8;
   max-width: 32ch;
 }
-.paged .atlas-art {
+.atlas-art {
   margin: 0;
-  min-height: 0;
   min-width: 0;
 }
-.paged .atlas-art > a {
+.atlas-art > a {
   background: none;
-  display: block;
 }
-.paged .atlas-art img {
-  width: 100%;
-  height: auto;
-  max-height: calc(
-    100dvh - var(--header-height) - var(--footer-height) - 134px
-  );
-  object-fit: contain;
-}
-.paged .atlas-art figcaption {
+.atlas-art figcaption {
   font-size: 13px;
-  gap: 20px;
-  padding-top: 18px;
   align-items: baseline;
 }
-.paged .atlas-art figcaption a {
-  font-size: 11px;
+.directions-screen {
+  padding-block: 35px 110px;
 }
-
-/* The four directions stay open; shared baselines and spacing keep them legible. */
-.paged .directions-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: safe center;
-}
-.paged .directions-screen > .eyebrow {
-  margin-bottom: 14px;
-}
-.paged .atlas-directions {
-  flex-shrink: 0;
-  gap: 0 48px;
-}
-.paged .atlas-direction summary {
-  min-height: 54px;
-  font-size: 17px;
-}
-.paged .expand-mark {
-  font-size: 18px;
-  opacity: 0.65;
-}
-.paged .direction-copy {
-  padding: 0 0 20px 23px;
-}
-.paged .direction-copy h3 {
-  font-size: clamp(20px, 1.85vw, 26px);
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-.paged .direction-copy p {
-  font-size: 14px;
-  line-height: 1.65;
-}
-.paged .direction-copy ul {
-  margin-top: 13px;
-  gap: 7px 16px;
-  font-size: 12px;
-}
-.paged .atlas-methods {
-  padding-top: 16px;
-  gap: 25px;
-}
-.paged .atlas-methods p {
-  font-size: 18px;
-}
-
-/* Publications: a reading margin beside the active paper, not a sparse list. */
-.paged .reading {
-  display: grid;
-  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.5fr);
-  grid-template-rows: auto auto 1fr auto;
-  column-gap: clamp(32px, 5vw, 76px);
-  align-content: center;
-}
-.paged .reading .section-heading {
-  grid-column: 1;
-  grid-row: 1 / 5;
-  align-self: center;
-  display: block;
-  margin: 0;
-}
-.paged .reading .section-heading > p {
-  font-size: 15px;
-  line-height: 1.8;
-  margin-top: 24px;
-  max-width: 30ch;
-}
-.paged .reading-tools,
-.paged .sort-note,
-.paged .paper-list,
-.paged .all-papers {
-  grid-column: 2;
-}
-.paged .reading-tools {
-  display: block;
-  padding-bottom: 10px;
-}
-.paged .filters {
-  gap: 4px 16px;
-  margin-bottom: 12px;
-}
-.paged .filters button {
-  border: 0;
-  border-bottom: 1px solid transparent;
-  border-radius: 0;
-  min-height: 34px;
-  padding: 4px 0;
-  font-size: 12px;
-  transition:
-    color 0.2s,
-    border-color 0.2s;
-}
-.paged .filters button[aria-pressed="true"] {
-  background: none;
-  color: var(--accent);
-  border-color: var(--accent);
-}
-.paged .filters button:hover {
-  color: var(--ink);
-  border-color: var(--line);
-}
-.paged #reading-count,
-.paged .sort-note {
-  font-size: 11px;
-}
-.paged .sort-note {
-  margin-bottom: 0;
-  max-width: none;
-}
-.paged .paper-list {
-  align-self: center;
-  min-width: 0;
-}
-.paged .paper {
-  grid-template-columns: 32px minmax(0, 1fr);
-  gap: 18px;
-  padding-block: 24px;
-}
-.paged .paper:hover {
-  background: transparent;
-}
-.paged .paper-arrow {
-  display: none;
-}
-.paged .paper-index {
-  font-size: 24px;
-}
-.paged .paper-meta {
-  margin-bottom: 12px;
-  gap: 7px 14px;
-}
-.paged .paper h3 {
-  font-size: clamp(23px, 2.2vw, 32px);
-  line-height: 1.25;
-  text-wrap: pretty;
-}
-.paged .paper-note {
-  font-size: 15px;
-  line-height: 1.7;
-  margin-top: 16px;
-}
-.paged .paper-original {
-  font-size: 13px;
-  margin-top: 12px;
-}
-.paged .all-papers {
-  margin-top: 6px;
-  font-size: 12px;
-  justify-self: start;
-}
-
-.paged .field-note {
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-  gap: clamp(40px, 6vw, 100px);
-  align-content: center;
-}
-.paged .field-note .landscape {
-  width: 100%;
-  transform: none;
-}
-.paged .field-note .landscape-frame {
-  aspect-ratio: 4/3;
-  max-height: calc(
-    100dvh - var(--header-height) - var(--footer-height) - 110px
-  );
-  border-radius: 3px;
-}
-.paged .field-copy > p:last-child {
-  line-height: 1.85;
-}
-
-/* Contact stays in the same paper palette as the rest of the site. */
-.paged .contact {
-  display: flex;
-  align-items: safe center;
-  background: var(--paper);
-  color: var(--ink);
-}
-.paged .contact-grid {
-  width: min(1240px, calc(100% - 112px));
-  gap: 90px;
-}
-.paged .contact-copy .eyebrow {
+.directions-screen > .eyebrow {
   color: var(--accent);
   margin-bottom: 22px;
 }
-.paged .contact-copy > p:not(.eyebrow, .status),
-.paged .privacy,
-.paged .note-form small,
-.paged .form-bottom > span {
+.reading {
+  padding-block: 80px 100px;
+  border-top: 1px solid var(--line);
+}
+.reading .section-heading h2 {
+  font-size: clamp(34px, 3.4vw, 50px);
+}
+.paper {
+  scroll-margin-top: 0;
+}
+.field-note {
+  padding-block: 85px 110px;
+  border-top: 1px solid var(--line);
+}
+.field-note .landscape {
+  transform: none;
+}
+.field-note .landscape-frame {
+  aspect-ratio: 4/3;
+  border-radius: 3px;
+}
+.contact {
+  background: var(--paper);
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+}
+.contact-copy .eyebrow {
+  color: var(--accent);
+}
+.contact-copy > p:not(.eyebrow, .status),
+.privacy,
+.note-form small,
+.form-bottom > span {
   color: var(--muted);
 }
-.paged .note-form {
+.note-form {
   padding-left: 40px;
   border-left: 1px solid var(--line);
 }
-.paged .note-form h3 {
-  margin-bottom: 20px;
-}
-.paged .note-form label {
-  margin-bottom: 16px;
-}
-.paged .note-form input,
-.paged .note-form textarea {
+.note-form input,
+.note-form textarea {
   color: var(--ink);
   border-color: var(--line);
 }
-.paged .note-form textarea {
-  resize: none;
-  max-height: 160px;
-}
-.paged .note-form input::placeholder,
-.paged .note-form textarea::placeholder {
+.note-form input::placeholder,
+.note-form textarea::placeholder {
   color: var(--muted);
 }
-.paged .button.light {
-  background: var(--ink);
+.button.light {
   color: var(--paper);
+  background: var(--ink);
 }
-.paged .contact a:focus-visible,
-.paged .contact button:focus-visible,
-.paged .note-form input:focus-visible,
-.paged .note-form textarea:focus-visible {
+.contact a:focus-visible,
+.contact button:focus-visible,
+.note-form input:focus-visible,
+.note-form textarea:focus-visible {
   outline-color: var(--accent);
 }
-.paged .status {
-  margin-top: 8px;
-}
-.paged .privacy {
-  margin-top: 8px;
-}
-.paged .footer {
-  padding-block: 8px;
-  height: var(--footer-height);
-  background: var(--paper);
+.footer {
   border-top: 1px solid var(--line);
 }
-.paged .footer p {
-  margin: 0;
-  font-size: 11px;
-}
-.paged .footer-signature {
-  font-size: 20px;
-}
-html[lang="zh-CN"].paged .hero h1 {
+html[lang="zh-CN"] .hero h1 {
   font-size: clamp(34px, 3.8vw, 58px);
-  line-height: 1.3;
-}
-html[lang="zh-CN"].paged .hero-lead {
-  font-size: 17px;
-  line-height: 1.85;
-}
-html[lang="zh-CN"].paged h2 {
-  font-size: clamp(30px, 3.2vw, 46px);
-}
-html[lang="zh-CN"].paged .reading h2 {
-  font-size: clamp(27px, 2.2vw, 34px);
-}
-html[lang="zh-CN"].paged .direction-copy h3 {
-  font-size: 22px;
-}
-
-@media (min-width: 1100px) and (min-height: 850px) {
-  .paged .paper h3 {
-    font-size: 23px;
-  }
-  .paged .paper {
-    padding-block: 20px;
-  }
-  .paged .paper-note {
-    font-size: 14px;
-    margin-top: 12px;
-  }
 }
 @media (max-width: 1000px) {
-  .paged .hero {
-    gap: 30px;
-  }
-  .paged .hero h1 {
-    font-size: 43px;
-  }
-  .paged .hero-actions {
-    gap: 12px;
-  }
-  .paged .contact-grid {
-    width: calc(100% - 64px);
-    gap: 32px;
-  }
-  .paged .note-form {
-    padding-left: 24px;
-  }
-  .paged .research-atlas {
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 30px;
-  }
-  .paged .reading {
-    grid-template-columns: 0.65fr 1.35fr;
-    gap: 0 30px;
-  }
-  .paged .atlas-directions {
-    column-gap: 30px;
-  }
-}
-@media (max-height: 740px) and (min-width: 701px) {
-  .paged .hero h1 {
-    font-size: clamp(38px, 4.1vw, 58px);
-    margin-block: 18px;
-  }
-  .paged .hero-bio {
-    margin-top: 14px;
+  .site-nav {
+    gap: 16px;
     font-size: 13px;
   }
-  .paged .hero-actions {
-    margin-top: 18px;
+  .hero {
+    gap: 30px;
   }
-  .paged .page-screen {
-    padding-block: 24px;
+  .research-atlas {
+    gap: 30px;
   }
-  .paged .direction-copy h3 {
-    font-size: 23px;
-  }
-  .paged .direction-copy p {
-    font-size: 14px;
-  }
-  .paged .direction-copy ul {
-    margin-top: 10px;
-  }
-  .paged .atlas-direction summary {
-    min-height: 48px;
-  }
-  .paged .atlas-methods p {
-    font-size: 16px;
+  .note-form {
+    padding-left: 24px;
   }
 }
 @media (max-width: 700px) {
-  .paged {
-    --footer-height: 56px;
-  }
-  .paged .masthead {
+  .masthead {
     min-height: 68px;
-    position: relative;
+    position: sticky;
   }
-  .paged .site-nav.open {
+  .site-nav.open {
     position: absolute;
     inset: 100% 0 auto;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
     padding: 18px 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 22px;
   }
-  .paged .wordmark {
-    font-size: 20px;
-  }
-  .paged .wordmark small {
-    font-size: 10px;
-  }
-  .paged .page-screen {
-    padding-block: 24px;
-  }
-  .paged .hero {
+  .hero {
     grid-template-columns: 1fr;
-    gap: 24px;
-    align-content: start;
+    gap: 28px;
+    padding-block: 40px 65px;
+    min-height: 0;
   }
-  .paged .hero h1 {
+  .hero h1 {
     font-size: clamp(36px, 8.2vw, 52px);
-    margin: 14px 0;
+    margin-block: 16px;
   }
-  .paged .hero-lead {
+  .hero-lead {
     font-size: 16px;
-    line-height: 1.55;
   }
-  .paged .hero-bio {
+  .hero-bio {
     font-size: 13px;
-    line-height: 1.6;
-    margin-top: 12px;
   }
-  .paged .hero-actions {
-    margin-top: 16px;
-    gap: 12px 18px;
+  .hero-actions {
+    gap: 14px;
   }
-  .paged .hero-actions .text-link,
-  .paged .hero-actions .button {
+  .hero-actions .button,
+  .hero-actions .text-link {
     font-size: 12px;
   }
-  .paged .hero .chalk-portrait {
+  .chalk-portrait {
     width: 100%;
   }
-  .paged .chalk-frame {
-    max-height: none;
+  .chalk-frame {
     aspect-ratio: 4/3;
   }
-  .paged .chalk-portrait figcaption {
-    padding-top: 10px;
-    font-size: 12px;
+  .research-atlas {
+    display: block;
+    padding-block: 65px 35px;
   }
-  .paged .research-atlas {
-    display: flex;
-    flex-direction: column;
-    justify-content: safe center;
-    align-items: stretch;
-    gap: 30px;
+  .research-atlas .section-heading > p {
+    max-width: none;
+    margin-top: 20px;
+    font-size: 15px;
   }
-  .paged .research-atlas h2 {
+  .atlas-art {
+    margin-top: 30px;
+  }
+  .directions-screen {
+    padding-block: 25px 65px;
+  }
+  .reading {
+    padding-block: 60px 65px;
+  }
+  .reading .section-heading h2 {
     font-size: 34px;
   }
-  .paged .research-atlas .section-heading .eyebrow {
-    margin-bottom: 12px;
+  .field-note {
+    padding-block: 65px;
   }
-  .paged .research-atlas .section-heading > p {
-    font-size: 14px;
-    margin-top: 18px;
-    max-width: 40ch;
-  }
-  .paged .atlas-art {
-    flex-shrink: 0;
-  }
-  .paged .atlas-art img {
-    max-height: none;
-  }
-  .paged .atlas-art figcaption {
-    font-size: 12px;
-  }
-  .paged .directions-screen {
-    justify-content: start;
-  }
-  .paged .direction-copy {
-    padding-left: 23px;
-    padding-bottom: 24px;
-  }
-  .paged .atlas-direction summary {
-    min-height: 58px;
-  }
-  .paged .direction-copy h3 {
-    font-size: 23px;
-  }
-  .paged .direction-copy p {
-    font-size: 14px;
-  }
-  .paged .atlas-methods p {
-    font-size: 16px;
-  }
-  .paged .reading {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .paged .reading .section-heading {
-    align-self: stretch;
-  }
-  .paged .reading .section-heading h2 {
-    font-size: 30px;
-  }
-  .paged .reading .section-heading > p {
-    max-width: none;
-    font-size: 13px;
-    line-height: 1.65;
-    margin-top: 14px;
-  }
-  .paged .reading-tools {
-    margin-top: 18px;
-    flex-shrink: 0;
-  }
-  .paged .filters {
-    gap: 2px 14px;
-    margin-bottom: 8px;
-  }
-  .paged .filters button {
-    font-size: 11px;
-    min-height: 32px;
-  }
-  .paged .paper-list {
-    align-self: stretch;
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .paged .paper {
-    display: block;
-    padding-block: 20px;
-  }
-  .paged .paper h3 {
-    font-size: 23px;
-  }
-  .paged .paper-note {
-    font-size: 14px;
-    line-height: 1.65;
-    margin-top: 12px;
-  }
-  .paged .paper-original {
-    font-size: 12px;
-  }
-  .paged .paper-links {
-    margin-top: 10px;
-  }
-  .paged .all-papers {
-    flex-shrink: 0;
-    margin-top: 4px;
-    font-size: 11px;
-  }
-  .paged .field-note {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: safe center;
-    gap: 30px;
-  }
-  .paged .field-copy .eyebrow {
-    margin-bottom: 14px;
-  }
-  .paged .field-copy > p:last-child {
-    margin-top: 18px;
-    font-size: 15px;
-  }
-  .paged .field-note .landscape {
+  .field-note .landscape {
     width: 100%;
-    flex-shrink: 0;
   }
-  .paged .field-note .landscape-frame {
-    max-height: none;
-  }
-  .paged .contact {
-    display: block;
-  }
-  .paged .contact-grid {
-    width: calc(100% - 40px);
-    gap: 30px;
-  }
-  .paged .contact h2 {
-    font-size: 32px;
-  }
-  .paged .contact-copy > p:not(.eyebrow, .status) {
-    font-size: 15px;
-    margin-top: 16px;
-  }
-  .paged .contact-copy .eyebrow {
-    margin-bottom: 14px;
-  }
-  .paged .email-address {
-    font-size: 21px;
-    padding-top: 14px;
-  }
-  .paged .contact-links {
-    margin-top: 4px;
-  }
-  .paged .note-form {
-    padding: 24px 0 0;
+  .note-form {
+    padding: 28px 0 0;
     border-left: 0;
     border-top: 1px solid var(--line);
-  }
-  .paged .footer {
-    flex-wrap: nowrap;
-    gap: 10px;
-  }
-  .paged .footer-signature {
-    font-size: 16px;
-  }
-  .paged .footer-signature span,
-  .paged .deck-hint {
-    display: none;
-  }
-  .deck-controls {
-    gap: 8px;
-  }
-  #deck-count {
-    font-size: 10px;
-    min-width: 0;
-    max-width: 180px;
-  }
-  .deck-controls button {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-  }
-  html[lang="zh-CN"].paged .hero h1 {
-    font-size: clamp(32px, 7.8vw, 48px);
-  }
-  html[lang="zh-CN"].paged .hero-lead {
-    font-size: 15px;
-    line-height: 1.75;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(page-content),
-  ::view-transition-old(page-content),
-  ::view-transition-new(page-content) {
-    animation: none !important;
   }
 }
