@@ -2,7 +2,6 @@
   "use strict";
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
   const menu = $(".menu-toggle");
   menu.hidden = false;
@@ -42,21 +41,23 @@
     let count = 0;
     $$(".paper").forEach((paper) => {
       paper.hidden = topic !== "all" && paper.dataset.topic !== topic;
+      paper.dataset.filtered = String(paper.hidden);
       if (!paper.hidden) count++;
     });
     $("#reading-count").textContent =
       `${count} ${$("#reading-count").dataset.suffix}`;
-    window.ScrollTrigger?.refresh();
+    document.dispatchEvent(new CustomEvent("papers-filtered"));
   }
   filters.forEach((button) =>
     button.addEventListener("click", () => filterPapers(button.dataset.filter)),
   );
-  $$(".atlas-direction").forEach((detail) =>
-    detail.addEventListener("toggle", () => window.ScrollTrigger?.refresh()),
-  );
   // A direct paper link must remain visible even after a topic filter was used.
   addEventListener("hashchange", () => {
-    if (location.hash.startsWith("#paper-")) filterPapers("all");
+    if (
+      location.hash.startsWith("#paper-") &&
+      !document.documentElement.classList.contains("paged")
+    )
+      filterPapers("all");
   });
 
   const form = $("#message-form");
@@ -130,36 +131,6 @@
     }
   });
 
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    const motion = gsap.matchMedia();
-    motion.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(
-        ".landscape img",
-        { scale: 1.09 },
-        {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".landscape",
-            start: "top bottom",
-            end: "bottom 25%",
-            scrub: 0.6,
-          },
-        },
-      );
-      // Each paper settles into place as it enters the reading area.
-      gsap.utils.toArray(".paper").forEach((paper) => {
-        gsap.from(paper, {
-          y: 24,
-          duration: 0.55,
-          ease: "power2.out",
-          clearProps: "transform",
-          scrollTrigger: { trigger: paper, start: "top 96%", once: true },
-        });
-      });
-    });
-  }
   // Preserve the existing first-party visit endpoint without changing its data model.
   if (apiBase) {
     const eventId =

@@ -71,7 +71,7 @@ for (const locale of ["en", "zh"]) {
     assert.ok($(".hero img").src.endsWith("jun-chalkboard.jpg"));
     assert.ok($("#research img").src.endsWith("research-wordcloud.png"));
     assert.equal($$('#research a[href^="#paper-"]').length, 0);
-    assert.equal($$("#research .atlas-direction").length, 4);
+    assert.equal($$("#directions .atlas-direction[open]").length, 4);
     assert.ok($(".field-note img").src.endsWith("jun-grassland.jpg"));
     assert.ok(
       $("#reading").compareDocumentPosition($(".field-note")) &

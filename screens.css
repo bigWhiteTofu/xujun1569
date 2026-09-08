@@ -1,0 +1,396 @@
+/* Progressive full-screen presentation. Without JavaScript the document stays readable. */
+.hero-bio {
+  margin-top: 22px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 510px;
+}
+.directions-screen {
+  padding-block: 60px;
+}
+.directions-screen > .eyebrow {
+  margin-bottom: 22px;
+  color: var(--accent);
+}
+.deck-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.deck-hint {
+  display: none;
+}
+.paged .deck-hint {
+  display: block;
+}
+.deck-controls button {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: transparent;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+.deck-controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+#deck-count {
+  font-size: 12px;
+  min-width: 200px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+#publication-page {
+  float: right;
+  font-variant-numeric: tabular-nums;
+}
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
+}
+.site-nav a[aria-current="location"]:after {
+  transform: scaleX(1);
+}
+.hero {
+  grid-template-columns: 1fr 1.18fr;
+  gap: 48px;
+}
+.hero h1 {
+  font-size: clamp(45px, 4.7vw, 70px);
+}
+.chalk-frame {
+  aspect-ratio: 4 / 3;
+}
+.chalk-portrait {
+  transform: rotate(0.8deg);
+}
+
+.paged {
+  --header-height: 84px;
+  --footer-height: 60px;
+  height: 100%;
+  overflow: hidden;
+}
+.paged body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) var(--footer-height);
+}
+.paged .masthead {
+  min-height: 84px;
+  flex-shrink: 0;
+}
+.paged main {
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+.paged .page-screen {
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  overscroll-behavior-y: contain;
+  padding-block: 36px;
+  scroll-padding: 20px;
+}
+.paged .page-screen:not([hidden]) {
+  animation: screen-arrive 0.25s ease-out;
+}
+.paged .page-screen:focus {
+  outline: none;
+}
+@keyframes screen-arrive {
+  from {
+    opacity: 0.5;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.paged .hero {
+  align-items: center;
+}
+.paged .hero-actions {
+  margin-top: 24px;
+  gap: 20px;
+}
+.paged .hero-actions .button,
+.paged .hero-actions .text-link {
+  font-size: 13px;
+}
+.paged .chalk-portrait {
+  margin: 10px 7px;
+}
+.paged .research-atlas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.paged .research-atlas .section-heading {
+  margin: 0;
+  flex-shrink: 0;
+}
+.paged h2 {
+  font-size: clamp(32px, 3.2vw, 46px);
+}
+.paged .section-heading > p {
+  font-size: 15px;
+  max-width: 360px;
+}
+.paged .atlas-art {
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.paged .atlas-art > a {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background: none;
+}
+.paged .atlas-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.paged .atlas-art figcaption {
+  flex-shrink: 0;
+  padding-top: 12px;
+}
+.paged .directions-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+.paged .directions-screen .atlas-directions {
+  flex-shrink: 0;
+}
+.paged .direction-copy h3 {
+  font-size: 22px;
+}
+.paged .direction-copy p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.paged .direction-copy {
+  padding-bottom: 22px;
+}
+.paged .atlas-direction summary {
+  min-height: 62px;
+}
+.paged .atlas-methods {
+  padding-top: 22px;
+}
+.paged .reading .section-heading {
+  margin-bottom: 22px;
+}
+.paged .reading-tools {
+  padding-bottom: 10px;
+}
+.paged .filters button {
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 12px;
+}
+.paged .sort-note {
+  margin-bottom: 12px;
+}
+.paged .paper {
+  padding-block: 24px;
+}
+.paged .paper h3 {
+  font-size: 24px;
+}
+.paged .paper-note {
+  font-size: 15px;
+}
+.paged .paper-meta {
+  margin-bottom: 10px;
+}
+.paged .all-papers {
+  margin-top: 18px;
+  font-size: 13px;
+}
+.paged .field-note {
+  align-items: center;
+}
+.paged .field-note .landscape {
+  width: min(100%, 620px);
+  justify-self: center;
+}
+.paged .field-note .landscape-frame {
+  max-height: calc(
+    100dvh - var(--header-height) - var(--footer-height) - 130px
+  );
+}
+.paged .contact {
+  display: flex;
+  align-items: safe center;
+}
+.paged .contact-grid {
+  width: min(1240px, calc(100% - 112px));
+}
+.paged .footer {
+  padding-block: 8px;
+  height: var(--footer-height);
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+.paged .footer p {
+  margin: 0;
+  font-size: 11px;
+}
+.paged .footer-signature {
+  font-size: 20px;
+}
+html[lang="zh-CN"].paged .hero h1 {
+  font-size: clamp(36px, 4.2vw, 62px);
+}
+html[lang="zh-CN"].paged .hero-bio {
+  line-height: 1.85;
+}
+html[lang="zh-CN"].paged h2 {
+  font-size: clamp(30px, 3vw, 43px);
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    gap: 30px;
+  }
+  .paged .contact-grid {
+    width: calc(100% - 64px);
+  }
+  .paged .hero-actions {
+    gap: 12px;
+  }
+  .paged .hero-actions .button {
+    padding-inline: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .paged {
+    --footer-height: 58px;
+  }
+  .paged .masthead {
+    position: relative;
+    min-height: 72px;
+  }
+  .paged .page-screen {
+    padding-block: 24px;
+  }
+  .paged .hero,
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .paged .hero {
+    align-content: start;
+  }
+  .hero h1 {
+    font-size: clamp(39px, 9vw, 60px);
+  }
+  .hero-bio {
+    font-size: 14px;
+  }
+  .chalk-portrait {
+    width: 100%;
+  }
+  .chalk-frame {
+    aspect-ratio: 4 / 3;
+  }
+  .paged .hero .chalk-portrait {
+    width: calc(100% - 14px);
+  }
+  .paged .research-atlas .section-heading > p {
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .paged .atlas-art {
+    min-height: 220px;
+  }
+  .paged .atlas-art figcaption {
+    font-size: 12px;
+  }
+  .paged .directions-screen {
+    justify-content: start;
+  }
+  .paged .direction-copy {
+    padding-inline: 23px 0;
+  }
+  .paged .paper h3 {
+    font-size: 21px;
+  }
+  .paged .paper-note {
+    font-size: 14px;
+  }
+  .paged .reading-tools {
+    display: block;
+  }
+  .paged .field-note {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 26px;
+  }
+  .paged .field-note .landscape {
+    width: 96%;
+    margin-inline: auto;
+    flex-shrink: 0;
+  }
+  .paged .field-note .landscape-frame {
+    max-height: none;
+    aspect-ratio: 4/3;
+  }
+  .paged .contact {
+    display: block;
+  }
+  .paged .contact-grid {
+    width: calc(100% - 40px);
+  }
+  .paged .footer {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .paged .footer-signature {
+    font-size: 16px;
+  }
+  .paged .footer-signature span,
+  .paged .deck-hint {
+    display: none;
+  }
+  .deck-controls {
+    gap: 7px;
+  }
+  #deck-count {
+    font-size: 10px;
+    min-width: 0;
+    max-width: 180px;
+  }
+  .deck-controls button {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  html[lang="zh-CN"].paged .hero h1 {
+    font-size: clamp(35px, 8vw, 58px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paged .page-screen:not([hidden]) {
+    animation: none;
+  }
+}
