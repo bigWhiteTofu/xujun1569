@@ -133,6 +133,7 @@ export const papers = [
   },
   {
     id: "srl",
+    distinction: { en: "ESI Highly Cited Paper · May/June 2026 · Social Sciences, general · top 1% for field and publication year", zh: "ESI 高被引论文 · 2026年5/6月 · 一般社会科学领域同发表年份前1%" },
     topic: "learning",
     year: "2026",
     journal: "British Journal of Educational Technology",
@@ -142,6 +143,14 @@ export const papers = [
       "AI support in self-regulated learning: A decade of technological evolution and meta-analysis",
     en: "How does AI support different phases of self-regulated learning? A meta-analysis of 35 studies examines the effects and the conditions that shape them.",
     zh: "AI 如何支持自我调节学习的不同阶段？这项纳入 35 项研究的元分析考察其作用，以及影响这些作用的条件。",
+  },
+  {
+    id: "genai-outcomes", topic: "learning", year: "2026",
+    journal: "Journal of Computer Assisted Learning",
+    doi: "https://doi.org/10.1002/jcal.70329",
+    title: "The Impact of Generative Artificial Intelligence on Learning Outcomes in Higher Education: A Meta-Analysis",
+    en: "A meta-analysis of 35 studies examines how generative AI relates to learning outcomes in higher education. Published online on 10 September 2026; 42(5), e70329.",
+    zh: "综合35项研究，考察生成式人工智能对高等教育学习结果的影响。2026年9月10日在线发表，42(5), e70329。",
   },
   {
     id: "literacy",
@@ -204,6 +213,18 @@ export const papers = [
     zh: "利用中国城市面板数据与双重差分分析，评估智慧城市政策与城市创新之间的关系。",
   },
   {
+    id: "resilience",
+    topic: "society",
+    year: "2026",
+    journal: "Business Process Management Journal",
+    doi: "https://doi.org/10.1108/BPMJ-04-2025-0550",
+    pdf: "bpmj-supply-chain-resilience.pdf",
+    title:
+      "Stage-specific impacts of digital technologies on supply chain resilience: Meta-analytic evidence for continuous process improvement",
+    en: "A synthesis of 70 studies compares how digital technologies relate to different phases of supply chain resilience.",
+    zh: "综合 70 项研究，比较数字技术在供应链韧性不同阶段的差异化作用。",
+  },
+  {
     id: "interpretability",
     topic: "learning",
     year: "2025",
@@ -227,18 +248,6 @@ export const papers = [
       "The role of teachers’ direct and emotional mentoring in shaping undergraduates’ research aspirations: A social cognitive career theory perspective",
     en: "How do direct mentoring and emotional support relate to undergraduates’ research aspirations? An examination through social cognitive career theory.",
     zh: "直接指导与情感支持如何关联本科生的科研志向？研究从社会认知职业理论视角考察其中的关系。",
-  },
-  {
-    id: "resilience",
-    topic: "society",
-    year: "2025",
-    journal: "Business Process Management Journal",
-    doi: "https://doi.org/10.1108/BPMJ-04-2025-0550",
-    pdf: "bpmj-supply-chain-resilience.pdf",
-    title:
-      "Stage-specific impacts of digital technologies on supply chain resilience: Meta-analytic evidence for continuous process improvement",
-    en: "A synthesis of 70 studies compares how digital technologies relate to different phases of supply chain resilience.",
-    zh: "综合 70 项研究，比较数字技术在供应链韧性不同阶段的差异化作用。",
   },
   {
     id: "sharing",

@@ -54,7 +54,7 @@ test("every topic filter preserves publication counts and descending year order"
     assert.equal($$('[data-filter][aria-pressed="true"]').length, 1);
   }
   $('[data-filter="all"]').click();
-  assert.equal($$(".paper:not([hidden])").length, 12);
+  assert.equal($$(".paper:not([hidden])").length, 13);
 });
 test("a direct paper anchor reveals a previously filtered-out publication", async (t) => {
   const { window, $, $$ } = await setup(t);
@@ -63,7 +63,7 @@ test("a direct paper anchor reveals a previously filtered-out publication", asyn
   window.location.hash = "#paper-trust";
   window.dispatchEvent(new window.HashChangeEvent("hashchange"));
   assert.equal($("#paper-trust").hidden, false);
-  assert.equal($$(".paper:not([hidden])").length, 12);
+  assert.equal($$(".paper:not([hidden])").length, 13);
 });
 for (const locale of ["en", "zh"]) {
   test(`${locale}: portrait, independent atlas, complete papers, and grassland appear in order`, async (t) => {
@@ -77,7 +77,7 @@ for (const locale of ["en", "zh"]) {
       $("#reading").compareDocumentPosition($(".field-note")) &
         window.Node.DOCUMENT_POSITION_FOLLOWING,
     );
-    assert.equal($$(".paper").length, 12);
+    assert.equal($$(".paper").length, 13);
     assert.equal($$(".paper-original").length, 2);
     assert.ok($$(".paper h3").every((h) => h.getAttribute("lang")));
   });

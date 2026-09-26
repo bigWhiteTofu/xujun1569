@@ -3,8 +3,9 @@ const publications = [
     role: "第一作者", filters: ["lead", "edu-ai", "methods"], journal: "British Journal of Educational Technology", year: "2026",
     pdf: "../assets/publications/bjet-ai-srl-meta-analysis.pdf", doi: "https://doi.org/10.1111/bjet.70058",
     title: "AI support in self-regulated learning: A decade of technological evolution and meta-analysis",
-    tags: ["中科院 1 区 · TOP", "SSCI Q1", "IF 13.0"],
-    summary: "整合 35 项研究与 133 个效应量，检验人工智能支持自我调节学习的总体作用、阶段差异与边界条件。"
+    tags: ["ESI 高被引 · 2026年5/6月", "中科院 1 区 · TOP", "SSCI Q1", "IF 13.0"],
+    evidence: "../assets/publications/bjet-esi-202606.png",
+    summary: "整合 35 项研究与 133 个效应量，检验人工智能支持自我调节学习的总体作用、阶段差异与边界条件。ESI 一般社会科学领域同发表年份前 1%（2026年5/6月）。"
   },
   {
     role: "唯一通讯作者", filters: ["lead", "methods"], journal: "Information Processing & Management", year: "2027",
@@ -21,6 +22,13 @@ const publications = [
     summary: "基于 B 站知识视频与 13 万余条弹幕，结合 PLS-SEM、组间比较和 BERTopic 分析来源线索、信任与知识采纳。"
   },
   {
+    role: "第四作者", filters: ["edu-ai", "methods"], journal: "Journal of Computer Assisted Learning", year: "2026",
+    doi: "https://doi.org/10.1002/jcal.70329",
+    title: "The Impact of Generative Artificial Intelligence on Learning Outcomes in Higher Education: A Meta-Analysis",
+    tags: ["2026.09 在线发表", "42(5), e70329"],
+    summary: "综合 35 项实验与准实验研究，考察生成式人工智能对高等教育学习结果的影响。承担验证与论文审阅修改工作。"
+  },
+  {
     role: "合作作者", filters: ["edu-ai", "methods"], journal: "Behaviour & Information Technology", year: "2026",
     pdf: "../assets/publications/bit-ai-literacy-review.pdf", doi: "https://doi.org/10.1080/0144929X.2026.2711024",
     title: "Mapping the evolving landscape of AI literacy research: An integrative review combining bibliometric analysis and thematic synthesis",
@@ -35,7 +43,7 @@ const publications = [
     summary: "从社会认知职业理论视角解释移动社交媒体情境下职业院校教师知识共享的心理与技术驱动机制。"
   },
   {
-    role: "第一作者", filters: ["lead", "methods"], journal: "Business Process Management Journal", year: "2025",
+    role: "第一作者", filters: ["lead", "methods"], journal: "Business Process Management Journal", year: "2026",
     pdf: "../assets/publications/bpmj-supply-chain-resilience.pdf", doi: "https://doi.org/10.1108/BPMJ-04-2025-0550",
     title: "Stage-specific impacts of digital technologies on supply chain resilience: Meta-analytic evidence for continuous process improvement",
     tags: ["SSCI Q1"],
@@ -87,34 +95,38 @@ const publications = [
 
 const ongoingStudies = [
   {
-    journal: "The Internet and Higher Education", role: "第一作者", status: "同行评审中",
-    title: "Frictionless tools, regulated minds: Designing GenAI diagnostic scaffolding for self-regulated learning in higher education",
-    image: "../assets/ongoing/ihe.png", note: "围绕生成式 AI 诊断性支架与自我调节学习开展平台实验。"
+    "journal": "The Internet and Higher Education",
+    "role": "第一作者",
+    "status": "返修中",
+    "title": "Frictionless tools, regulated minds: Designing GenAI diagnostic scaffolding for self-regulated learning in higher education",
+    "image": "../assets/ongoing/ihe-revise-20260926.jpg",
+    "note": "围绕生成式 AI 诊断性支架与自我调节学习开展平台实验。投稿系统状态为 Revise；返修截止 2026年10月1日。",
+    "evidence": [
+      {
+        "image": "../assets/ongoing/ihe-revise-20260926.jpg",
+        "label": "返修状态（Revise）"
+      },
+      {
+        "image": "../assets/ongoing/ihe-review-complete-20260926.png",
+        "label": "审稿完成（Review Complete）"
+      }
+    ]
   },
   {
-    journal: "Information Processing & Management", role: "第一作者", status: "同行评审中",
-    title: "Seeing experience through multimodal traces: How practice auditability calibrates information processing and trust in the GenAI era",
-    image: "../assets/ongoing/ipm.png", note: "结合多模态编码、行为数据与随机实验检验可见实践证据对信任校准的作用。"
+    "journal": "Information Processing & Management",
+    "role": "第一作者",
+    "status": "同行评审中",
+    "title": "Seeing experience through multimodal traces: How practice auditability calibrates information processing and trust in the GenAI era",
+    "image": "../assets/ongoing/ipm-20260926.png",
+    "note": "结合多模态编码、行为数据与随机实验检验可见实践证据对信任校准的作用。"
   },
   {
-    journal: "Computers & Education", role: "合作作者", status: "同行评审中",
-    title: "Can Multiple Debating Agents Outperform a Single Socratic Agent? Effects on Secondary School Students’ Critical Thinking",
-    image: "../assets/ongoing/compedu.png", note: "比较多智能体辩论与单一苏格拉底式智能体对中学生批判性思维的影响。"
-  },
-  {
-    journal: "Business Ethics, the Environment & Responsibility", role: "通讯作者", status: "同行评审中",
-    title: "Beyond symbolic compliance: A meta-analysis of corporate AI tasks and non-interchangeable sustainability outcomes",
-    image: "../assets/ongoing/beer.png", note: "通过元分析区分企业 AI 任务与不同可持续发展结果之间的作用差异。"
-  },
-  {
-    journal: "Engineering, Construction and Architectural Management", role: "通讯作者", status: "同行评审中",
-    title: "Beyond the Project Blueprint: How Regional Configurations Align Digital Development with Innovation Network Resilience for Infrastructure-Intensive Development",
-    image: "../assets/ongoing/ecam.png", note: "以区域组态视角解释数字发展与创新网络韧性的匹配机制。"
-  },
-  {
-    journal: "Journal of Business Research", role: "通讯作者", status: "同行评审中",
-    title: "When posts outpace patents: Multimodal corporate AI washing and stakeholder verification frictions on digital platforms",
-    image: "../assets/ongoing/jbr.png", note: "研究数字平台中的企业 AI 表述、利益相关者核验摩擦与创新真实性。"
+    "journal": "Journal of Business Research",
+    "role": "通讯作者",
+    "status": "同行评审中",
+    "title": "When posts outpace patents: Multimodal corporate AI washing and stakeholder verification frictions on digital platforms",
+    "image": "../assets/ongoing/jbr-20260926.png",
+    "note": "研究数字平台中的企业 AI 表述、利益相关者核验摩擦与创新真实性。"
   }
 ];
 
@@ -155,6 +167,7 @@ const dialogTitle = document.querySelector("#media-title");
 function renderPublications(filter = "all") {
   const visible = publications.filter((item) => filter === "all" || item.filters.includes(filter));
   const tagClass = (tag) => {
+    if (tag.includes("ESI")) return "tag tag-top";
     if (tag.includes("中科院 1 区")) return "tag tag-top";
     if (tag.includes("Q1")) return "tag tag-q1";
     if (tag.includes("SSCI Q2")) return "tag tag-q2";
@@ -172,7 +185,8 @@ function renderPublications(filter = "all") {
       <div class="publication-side">
         <div class="publication-tags">${item.tags.map((tag) => `<span class="${tagClass(tag)}">${tag}</span>`).join("")}</div>
         <div class="publication-actions">
-          <button class="read-publication" type="button" data-pdf="${item.pdf}" data-title="${item.journal}｜${item.title}">站内阅读全文</button>
+          ${item.pdf ? `<button class="read-publication" type="button" data-pdf="${item.pdf}" data-title="${item.journal}｜${item.title}">站内阅读全文</button>` : ""}
+          ${item.evidence ? `<button class="evidence-button" type="button" data-image="${item.evidence}" data-title="ESI Highly Cited Paper｜2026年5/6月">高被引证明</button>` : ""}
           <a class="doi-link" href="${item.doi}" target="_blank" rel="noreferrer">DOI ↗</a>
         </div>
       </div>
@@ -189,7 +203,7 @@ function renderOngoing() {
         <h3>${item.title}</h3>
         <p class="ongoing-journal">${item.journal}</p>
         <p>${item.note}</p>
-        <button class="evidence-button" type="button" data-image="${item.image}" data-title="${item.journal}｜送审状态证明">查看送审截图</button>
+        ${(item.evidence || [{ image: item.image, label: "查看送审截图" }]).map((proof) => `<button class="evidence-button" type="button" data-image="${proof.image}" data-title="${item.journal}｜${proof.label}">${proof.label}</button>`).join(" ")}
       </div>
       <figure class="ongoing-card-media" data-image="${item.image}" data-title="${item.journal}｜送审状态证明"><img src="${item.image}" alt="${item.journal} 送审状态截图"></figure>
     </article>`).join("");
